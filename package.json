@@ -1,0 +1,18 @@
+{
+  "name": "svg-editor",
+  "version": "0.1.0",
+  "private": true,
+  "devDependencies": {
+    "grunt": "~1.0.0",
+    "grunt-contrib-concat": "^1.0.1",
+    "grunt-contrib-connect": "^1.0.2",
+    "grunt-contrib-uglify": "^2.0.0",
+    "grunt-contrib-watch": "^1.0.0"
+  },
+  "scripts": {
+    "prestart": "npm install",
+    "start": "grunt server",
+    "test": "grunt server --test",
+    "build": "grunt build"
+  }
+}

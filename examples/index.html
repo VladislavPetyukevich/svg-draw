@@ -1,0 +1,169 @@
+<html>
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<title>Svg editor</title>
+	<link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+
+<body>
+	<div class="block">
+		Svg editor
+		<br>
+		<svg id="editSvg" width="400" height="400"></svg>
+	</div>
+	<div class="block">
+		Rendered png image
+		<br>
+		<img id="image" width="400" height="400">
+	</div>
+	<div>
+		<button id="addRectButton">Add rect</button>
+		<button id="addEllipseButton">Add ellipse</button>
+		<button id="addPathButton">Add triangle path</button>
+		<span><input id="gridCheckBox" type="checkbox" checked>Grid</span>
+		<a id="downloadImageLink" href="" download="image.svg">Download svg image</a>
+		<hr>
+	</div>
+	<div id="propPanel">
+		<input id="colorSelector" type="color">
+		<button id="toFront">To front</button>
+		<button id="toBack">To back</button>
+	</div>
+	<script type="text/javascript" src="../src/util.js"></script>
+	<script type="text/javascript" src="../src/ElementTransformer.js"></script>
+	<script type="text/javascript" src="../src/ControlElements.js"></script>
+	<script type="text/javascript" src="../src/UserEvents.js"></script>
+	<script type="text/javascript" src="../src/DOMFactory.js"></script>
+	<script type="text/javascript" src="../src/Objects/Rect.js"></script>
+	<script type="text/javascript" src="../src/Objects/Ellipse.js"></script>
+	<script type="text/javascript" src="../src/Objects/Path.js"></script>
+	<script type="text/javascript" src="../src/Objects/SVGObject.js"></script>
+	<script type="text/javascript" src="../src/Factory.js"></script>
+	<script type="text/javascript" src="../src/SvgEditor.js"></script>
+	<!--Build usage
+		<script type="text/javascript" src="../build/svgEditor.min.js"></script>
+	-->
+
+	<script type="text/javascript">
+	
+		var svgEl = document.getElementById('editSvg');
+		var props = {
+			svg: svgEl,
+			controlElementsStyles: {
+				size: 25,
+				closeButtonColor: '#ff3333',
+				rotateButtonColor: '#ff9933',
+				resizeButtonColor: '#330000'
+			},
+			cellSize: 20,
+			step: 0.5
+		};
+		var editor = new SvgEditor(props);
+
+
+		addRectButton.addEventListener('click', function () {
+			var rect = editor.factory.rect(
+				{ x: 0, y: 0, width: 80, height: 80, fill: '#0000FF' }
+			);
+			rect.hasControlElements = true;
+			rect.resizable = true;
+			rect.rotatable = true;
+			rect.snapToGrid = true;
+			rect.snapRotateToGrid = true;
+			editor.makeDraggable(rect);
+			editor.add(rect);
+		});
+		//addRectButton.click();
+
+		addEllipseButton.addEventListener('click', function () {
+			var ellipse = editor.factory.ellipse(
+				{ x: 0, y: 0, width: 80, height: 80, fill: '#FF00FF' }
+			);
+			ellipse.hasControlElements = true;
+			ellipse.resizable = true;
+			ellipse.rotatable = true;
+			ellipse.snapToGrid = true;
+			ellipse.snapRotateToGrid = true;
+			editor.makeDraggable(ellipse);
+			editor.add(ellipse);
+		});
+
+		// editor.loadFromSvg('<svg xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400"><!-- Created with SVG-edit - http://someurl.com --><rect x="80" y="80" width="160" height="160" fill="#0000FF" class="draggableSvg" style="position:relative;" transform="" snaprotatetogrid="true" snaptogrid="true" rotatable="true" resizable="true" hascontrolelements="true"/><path d="M80,80 L120,0 L160,80 Z" fill="#FF0000" class="draggableSvg" style="position:relative;" transform="" snaprotatetogrid="true" snaptogrid="true" resizable="true" hascontrolelements="true"/><path d="M160,80 L200,0 L240,80 Z" fill="#FF0000" class="draggableSvg" style="position:relative;" transform="" snaprotatetogrid="true" snaptogrid="true" rotatable="true" hascontrolelements="true"/></svg>');
+
+		addPathButton.addEventListener('click', function () {
+			var path = editor.factory.path(
+				{ type: 'path', x: 0, y: 0, width: 80, height: 80, d: 'M0,40 L20,0 L40,40 Z', fill: '#FF0000' }
+			);
+			path.hasControlElements = true;
+			path.resizable = true;
+			path.rotatable = true;
+			path.snapToGrid = true;
+			path.snapRotateToGrid = true;
+			editor.makeDraggable(path);
+			editor.add(path);
+		});
+
+		var getImg = function () {
+			editor.getImageLink().then(function (result) {
+				image.src = result;
+			});
+		}
+
+		var colorSelector = document.getElementById('colorSelector');
+		colorSelector.addEventListener('change', function () {
+			var selectedElement = editor.getSelectedElement();
+			if (selectedElement == undefined) return;
+			selectedElement.setAttribute('fill', this.value);
+			getImg();
+		});
+
+		var toFrontButton = document.getElementById('toFront');
+		toFrontButton.addEventListener('click', function () {
+			var selectedElement = editor.getSelectedElement();
+			if (selectedElement == undefined) return;
+			selectedElement.parentNode.appendChild(selectedElement);
+			getImg();
+		});
+
+		var toBackButton = document.getElementById('toBack');
+		toBackButton.addEventListener('click', function () {
+			var selectedElement = editor.getSelectedElement();
+			if (selectedElement == undefined) return;
+			var firstChild = selectedElement.parentNode.firstChild;
+			if (firstChild) {
+				selectedElement.parentNode.insertBefore(selectedElement, firstChild);
+			}
+			getImg();
+		});
+
+		var changeListener = function () {
+			console.log('change event');
+			getImg();
+			var selectedElement = editor.getSelectedElement();
+			if (selectedElement == undefined) {
+				colorSelector.removeAttribute('value');
+				return;
+			}
+			colorSelector.setAttribute('value', selectedElement.getAttribute('fill'));
+		}
+		editor.userEvents.onChange(changeListener);
+		// editor.userEvents.onResize(changeListener);
+		// editor.userEvents.onMove(changeListener);
+		// editor.userEvents.onRotate(changeListener);
+
+		var downloadImageLink = document.getElementById('downloadImageLink');
+		downloadImageLink.addEventListener('click', (function (evt) {
+			evt.target.setAttribute('href', editor.getSvgImageLink());
+		}).bind(this));
+
+		var grid = svgEl.getElementById('grid');
+		var gridCheckBox = document.getElementById('gridCheckBox');
+		gridCheckBox.addEventListener('click', (function (evt) {
+			grid.style.opacity = (grid.style.opacity != '0') ? '0' : '0.3';
+		}).bind(this));
+	</script>
+</body>
+
+</html>
