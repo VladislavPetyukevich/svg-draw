@@ -1,17 +1,17 @@
-#Svg-Editor
+# Svg-Editor
 Small js svg editor. Supports touch screen.  
 Current version 0.1.
 
-##Building
+## Building
 Type `grunt build` or `npm run build` for build libary.
 
-##Testing
+## Testing
 Type `npm test` for run tests.
 
-##Demo
+## Demo
 You can see live demo [here](https://beb21.neocities.org/svg/index.html) or you can run demo from libary: `npm start`
 
-##Example Usage
+## Example Usage
 ```javascript
 var svgEl = document.getElementsByTagName('svg')[0];
 var props = {
@@ -39,7 +39,7 @@ editor.makeDraggable(rect);
 editor.add(rect);
 ```
 
-##Bugs
+## Bugs
 1. After changing size of rotated element, it changes its position. Because element size and coordinates of the element center in the rotation attribute changes togrther.
 2. Export svg to png image don't works in Mozilla Firefox.
 3. There is an error when setting negative element sizes.
