@@ -14,7 +14,7 @@ function rotateVector(vector, angle) {
 	}
 }
 
-var getElementAttributes = function (el) {
+function getElementAttributes(el) {
 	var bodyBoundingClientRect = document.body.getBoundingClientRect();
 	var boundingClientRect = el.getBoundingClientRect();
 	var attributes = {};
@@ -25,7 +25,7 @@ var getElementAttributes = function (el) {
 	return attributes;
 }
 
-var getElementNoRotateAttributes = function (el) {
+function getElementNoRotateAttributes(el) {
 	var elCopy = el.cloneNode();
 	ElementTransformer.removeTransformAttribute(elCopy, 'rotate');
 	elCopy.style.visibility = 'hidden';
@@ -36,7 +36,7 @@ var getElementNoRotateAttributes = function (el) {
 	return attributes;
 }
 
-var getSafeAttributeName = function (name) {
+function getSafeAttributeName(name) {
 	var result = '' + name;
 	if (result.indexOf('-') == -1) return result;
 
@@ -47,14 +47,14 @@ var getSafeAttributeName = function (name) {
 	return arr.join('')
 }
 
-var getEventCoordinates = function (event) {
-	if(isVarExists(event.touches)){
+function getEventCoordinates(event) {
+	if (isVarExists(event.touches)) {
 		return event.touches[0];
 	}
 	return event;
 }
 
-prepareSvgCodeToSave = function (svgEl, width, height) {
+function prepareSvgCodeToSave(svgEl, width, height) {
 	var newSvgEl = document.createElementNS("http://www.w3.org/2000/svg", 'svg');
 	newSvgEl.setAttribute('viewBox', '0 0 ' + width + ' ' + height);
 	newSvgEl.innerHTML = '<!-- Created with SVG-edit - http://someurl.com -->';
@@ -73,6 +73,6 @@ prepareSvgCodeToSave = function (svgEl, width, height) {
 	return source;
 }
 
-var isVarExists = function (variable) {
+function isVarExists(variable) {
 	return typeof variable !== 'undefined';
 }
