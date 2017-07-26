@@ -41,7 +41,7 @@ Rect.scale = function (width, height) {
 Rect.rotate = function (angle) {
     var elPos = this.getPosition();
     var elSize = this.getSize();
-    centerX = elPos.x + elSize.width / 2;
-    centerY = elPos.y + elSize.height / 2
+    var centerX = elPos.x + elSize.width / 2;
+    var centerY = elPos.y + elSize.height / 2
     ElementTransformer.setTransformAttribute(this, 'rotate', angle + ' ' + centerX + ' ' + centerY);
 }

@@ -110,11 +110,11 @@ var UserEvents = function (cellSize, moveStep, controlElements) {
 	this.resize = (function (evt) {
 		if (evt.button == 2) return;
 		var evtCoordinates = getEventCoordinates(evt);
-		dx = evtCoordinates.clientX - this.currentX;
-		dy = evtCoordinates.clientY - this.currentY;
+		this.dx = evtCoordinates.clientX - this.currentX;
+		this.dy = evtCoordinates.clientY - this.currentY;
 		var scaleVector = {
-			x: dx / this.lastSelectedElement.getBBox().width,
-			y: dy / this.lastSelectedElement.getBBox().height
+			x: this.dx / this.lastSelectedElement.getBBox().width,
+			y: this.dy / this.lastSelectedElement.getBBox().height
 		}
 		var elPos = this.lastSelectedElement.getPosition();
 
@@ -203,16 +203,16 @@ var UserEvents = function (cellSize, moveStep, controlElements) {
 	this.rotate = (function (evt) {
 		if (evt.button == 2) return;
 		var evtCoordinates = getEventCoordinates(evt);
-		dx = evtCoordinates.clientX - this.currentX;
-		dy = evtCoordinates.clientY - this.currentY;
+		this.dx = evtCoordinates.clientX - this.currentX;
+		this.dy = evtCoordinates.clientY - this.currentY;
 
 		var elPos = this.lastSelectedElement.getPosition();
 		var elSize = this.lastSelectedElement.getSize();
-		centerX = elPos.x + elSize.width / 2;
-		centerY = elPos.y + elSize.height / 2;
-		x = evtCoordinates.clientX - centerX;
-		y = evtCoordinates.clientY - centerY;
-		angle = -(180 + 90 - 180 / Math.PI * Math.atan2(y, x));
+		var centerX = elPos.x + elSize.width / 2;
+		var centerY = elPos.y + elSize.height / 2;
+		var x = evtCoordinates.clientX - centerX;
+		var y = evtCoordinates.clientY - centerY;
+		var angle = -(180 + 90 - 180 / Math.PI * Math.atan2(y, x));
 		this.lastSelectedElement.rotate(angle);
 
 		this.controlElements.update(this.lastSelectedElement);

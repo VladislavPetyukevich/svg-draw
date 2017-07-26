@@ -11,6 +11,7 @@
 
 	this.container = undefined;
 	this.resizeButton = Factory.rect({ x: 0, y: 0, width: styles.size, height: styles.size, fill: styles.resizeButtonColor, id: 'resizeButton' });
+	this.resizeButton.style['cursor'] = 'se-resize';
 	this.closeButton = Factory.ellipse({ x: 0, y: 0, width: styles.size, height: styles.size, fill: styles.closeButtonColor, id: 'closeButton' });
 	this.rotateButton = Factory.ellipse({ x: 0, y: 0, width: styles.size, height: styles.size, fill: styles.rotateButtonColor, id: 'rotateButton' });
 	this.contour = DOMFactory.createObject({ type: 'polyline', fill: 'none', stroke: 'black', 'stroke-dasharray': '5', 'stroke-width': '1' });
@@ -348,8 +349,8 @@ Ellipse.scale = function (width, height) {
 Ellipse.rotate = function (angle) {
     var elPos = this.getPosition();
     var elSize = this.getSize();
-    centerX = elPos.x + elSize.width / 2;
-    centerY = elPos.y + elSize.height / 2;
+    var centerX = elPos.x + elSize.width / 2;
+    var centerY = elPos.y + elSize.height / 2;
     ElementTransformer.setTransformAttribute(this, 'rotate', angle + ' ' + centerX + ' ' + centerY);
 };var Path = new Object();
 
@@ -487,8 +488,8 @@ Path.scale = function (width, height) {
 Path.rotate = function (angle) {
     var elPos = this.getPosition();
     var elSize = this.getSize();
-    centerX = elPos.x + elSize.width / 2;
-    centerY = elPos.y + elSize.height / 2;
+    var centerX = elPos.x + elSize.width / 2;
+    var centerY = elPos.y + elSize.height / 2;
     ElementTransformer.setTransformAttribute(this, 'rotate', angle + ' ' + centerX + ' ' + centerY);
 };var Rect = new Object();
 
@@ -533,8 +534,8 @@ Rect.scale = function (width, height) {
 Rect.rotate = function (angle) {
     var elPos = this.getPosition();
     var elSize = this.getSize();
-    centerX = elPos.x + elSize.width / 2;
-    centerY = elPos.y + elSize.height / 2
+    var centerX = elPos.x + elSize.width / 2;
+    var centerY = elPos.y + elSize.height / 2
     ElementTransformer.setTransformAttribute(this, 'rotate', angle + ' ' + centerX + ' ' + centerY);
 };var SVGObject = {
     rect: Rect,
@@ -545,6 +546,7 @@ Rect.rotate = function (angle) {
 	this.cellSize = props.cellSize;
 	this.moveStep = props.step;
 
+	this.__addSvgStyles();
 	//init layers
 	this.layers = [];
 	this.layers['userCanvas'] = undefined;
@@ -568,6 +570,14 @@ Rect.rotate = function (angle) {
 	this.svgEl.addEventListener('touchend', click.bind(this));
 }
 
+SvgEditor.prototype.__addSvgStyles = function () {
+	this.svgEl.style['user-select'] = 'none';
+	this.svgEl.style['-webkit-user-select'] = 'none';
+	this.svgEl.style['-khtml-user-select'] = 'none';
+	this.svgEl.style['-moz-user-select'] = 'none';
+	this.svgEl.style['-o-user-select'] = 'none';
+}
+
 SvgEditor.prototype.initUserCanvasLayer = function () {
 	this.layers['userCanvas'] = this.svgEl.appendChild(DOMFactory.createGroup());
 	this.layers['userCanvas'].setAttribute('id', 'userCanvas');
@@ -576,6 +586,7 @@ SvgEditor.prototype.initUserCanvasLayer = function () {
 SvgEditor.prototype.initGridLayer = function () {
 	this.layers['grid'] = document.createElementNS("http://www.w3.org/2000/svg", 'g');
 	this.layers['grid'].setAttribute("id", "grid");
+	this.layers['grid'].style['pointer-events'] = 'none';
 	var svgWidth = parseInt(this.svgEl.getAttribute('width'));
 	var svgHeight = parseInt(this.svgEl.getAttribute('height'));
 
@@ -656,7 +667,7 @@ SvgEditor.prototype.getImageLink = function () {
 
 SvgEditor.prototype.add = function (object) {
 	this.layers['userCanvas'].appendChild(object);
-	if(this.userEvents.onChangeHandler != undefined) this.userEvents.onChangeHandler();
+	if (this.userEvents.onChangeHandler != undefined) this.userEvents.onChangeHandler();
 }
 
 SvgEditor.prototype.getSelectedElement = function () {
@@ -773,11 +784,11 @@ SvgEditor.prototype.getSelectedElement = function () {
 	this.resize = (function (evt) {
 		if (evt.button == 2) return;
 		var evtCoordinates = getEventCoordinates(evt);
-		dx = evtCoordinates.clientX - this.currentX;
-		dy = evtCoordinates.clientY - this.currentY;
+		this.dx = evtCoordinates.clientX - this.currentX;
+		this.dy = evtCoordinates.clientY - this.currentY;
 		var scaleVector = {
-			x: dx / this.lastSelectedElement.getBBox().width,
-			y: dy / this.lastSelectedElement.getBBox().height
+			x: this.dx / this.lastSelectedElement.getBBox().width,
+			y: this.dy / this.lastSelectedElement.getBBox().height
 		}
 		var elPos = this.lastSelectedElement.getPosition();
 
@@ -866,16 +877,16 @@ SvgEditor.prototype.getSelectedElement = function () {
 	this.rotate = (function (evt) {
 		if (evt.button == 2) return;
 		var evtCoordinates = getEventCoordinates(evt);
-		dx = evtCoordinates.clientX - this.currentX;
-		dy = evtCoordinates.clientY - this.currentY;
+		this.dx = evtCoordinates.clientX - this.currentX;
+		this.dy = evtCoordinates.clientY - this.currentY;
 
 		var elPos = this.lastSelectedElement.getPosition();
 		var elSize = this.lastSelectedElement.getSize();
-		centerX = elPos.x + elSize.width / 2;
-		centerY = elPos.y + elSize.height / 2;
-		x = evtCoordinates.clientX - centerX;
-		y = evtCoordinates.clientY - centerY;
-		angle = -(180 + 90 - 180 / Math.PI * Math.atan2(y, x));
+		var centerX = elPos.x + elSize.width / 2;
+		var centerY = elPos.y + elSize.height / 2;
+		var x = evtCoordinates.clientX - centerX;
+		var y = evtCoordinates.clientY - centerY;
+		var angle = -(180 + 90 - 180 / Math.PI * Math.atan2(y, x));
 		this.lastSelectedElement.rotate(angle);
 
 		this.controlElements.update(this.lastSelectedElement);
