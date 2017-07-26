@@ -3,6 +3,7 @@ var SvgEditor = function (props) {
 	this.cellSize = props.cellSize;
 	this.moveStep = props.step;
 
+	this.__addSvgStyles();
 	//init layers
 	this.layers = [];
 	this.layers['userCanvas'] = undefined;
@@ -26,6 +27,14 @@ var SvgEditor = function (props) {
 	this.svgEl.addEventListener('touchend', click.bind(this));
 }
 
+SvgEditor.prototype.__addSvgStyles = function () {
+	this.svgEl.style['user-select'] = 'none';
+	this.svgEl.style['-webkit-user-select'] = 'none';
+	this.svgEl.style['-khtml-user-select'] = 'none';
+	this.svgEl.style['-moz-user-select'] = 'none';
+	this.svgEl.style['-o-user-select'] = 'none';
+}
+
 SvgEditor.prototype.initUserCanvasLayer = function () {
 	this.layers['userCanvas'] = this.svgEl.appendChild(DOMFactory.createGroup());
 	this.layers['userCanvas'].setAttribute('id', 'userCanvas');
@@ -34,6 +43,7 @@ SvgEditor.prototype.initUserCanvasLayer = function () {
 SvgEditor.prototype.initGridLayer = function () {
 	this.layers['grid'] = document.createElementNS("http://www.w3.org/2000/svg", 'g');
 	this.layers['grid'].setAttribute("id", "grid");
+	this.layers['grid'].style['pointer-events'] = 'none';
 	var svgWidth = parseInt(this.svgEl.getAttribute('width'));
 	var svgHeight = parseInt(this.svgEl.getAttribute('height'));
 
@@ -114,7 +124,7 @@ SvgEditor.prototype.getImageLink = function () {
 
 SvgEditor.prototype.add = function (object) {
 	this.layers['userCanvas'].appendChild(object);
-	if(this.userEvents.onChangeHandler != undefined) this.userEvents.onChangeHandler();
+	if (this.userEvents.onChangeHandler != undefined) this.userEvents.onChangeHandler();
 }
 
 SvgEditor.prototype.getSelectedElement = function () {

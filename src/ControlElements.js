@@ -10,6 +10,7 @@ var ControlElements = function (svgContainer, styles) {
 
 	this.container = undefined;
 	this.resizeButton = Factory.rect({ x: 0, y: 0, width: styles.size, height: styles.size, fill: styles.resizeButtonColor, id: 'resizeButton' });
+	this.resizeButton.style['cursor'] = 'se-resize';
 	this.closeButton = Factory.ellipse({ x: 0, y: 0, width: styles.size, height: styles.size, fill: styles.closeButtonColor, id: 'closeButton' });
 	this.rotateButton = Factory.ellipse({ x: 0, y: 0, width: styles.size, height: styles.size, fill: styles.rotateButtonColor, id: 'rotateButton' });
 	this.contour = DOMFactory.createObject({ type: 'polyline', fill: 'none', stroke: 'black', 'stroke-dasharray': '5', 'stroke-width': '1' });

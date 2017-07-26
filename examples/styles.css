@@ -9,20 +9,9 @@
 
 svg{
 	border: 1px solid black;
-	user-select: none;
-	-webkit-user-select: none;
-	-khtml-user-select: none;
-	-moz-user-select: none;
-	-o-user-select: none;
-	user-select: none;
 }
 
 #grid{
-	pointer-events: none;
 	opacity: 0.3;
 	transition: 0.5s;
-}
-
-#resizeButton{
-	cursor: se-resize;
 }
