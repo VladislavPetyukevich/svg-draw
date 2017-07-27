@@ -880,8 +880,11 @@ SvgEditor.prototype.getSelectedElement = function () {
 		this.dx = evtCoordinates.clientX - this.currentX;
 		this.dy = evtCoordinates.clientY - this.currentY;
 
-		var elPos = this.lastSelectedElement.getPosition();
-		var elSize = this.lastSelectedElement.getSize();
+		// var elPos = this.lastSelectedElement.getPosition();
+		// var elSize = this.lastSelectedElement.getSize();
+		var attr = getElementNoRotateAttributes(this.lastSelectedElement);
+		var elPos = { x: attr.x, y: attr.y };
+		var elSize = { width: attr.width, height: attr.height };
 		var centerX = elPos.x + elSize.width / 2;
 		var centerY = elPos.y + elSize.height / 2;
 		var x = evtCoordinates.clientX - centerX;

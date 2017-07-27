@@ -206,10 +206,9 @@ var UserEvents = function (cellSize, moveStep, controlElements) {
 		this.dx = evtCoordinates.clientX - this.currentX;
 		this.dy = evtCoordinates.clientY - this.currentY;
 
-		var elPos = this.lastSelectedElement.getPosition();
-		var elSize = this.lastSelectedElement.getSize();
-		var centerX = elPos.x + elSize.width / 2;
-		var centerY = elPos.y + elSize.height / 2;
+		var attribs = getElementNoRotateAttributes(this.lastSelectedElement);
+		var centerX = attribs.x + attribs.width / 2;
+		var centerY = attribs.y + attribs.height / 2;
 		var x = evtCoordinates.clientX - centerX;
 		var y = evtCoordinates.clientY - centerY;
 		var angle = -(180 + 90 - 180 / Math.PI * Math.atan2(y, x));
