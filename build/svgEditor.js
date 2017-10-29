@@ -354,143 +354,142 @@ Ellipse.rotate = function (angle) {
     ElementTransformer.setTransformAttribute(this, 'rotate', angle + ' ' + centerX + ' ' + centerY);
 };var Path = new Object();
 
+Path.toArray = function () {
+	var resultPathArray = [];
+	var path = this.getAttribute('d').split(' ');
+	for (var i = 0; i < path.length; i++) {
+		if (path[i].length == 1) { //if it single command like 'Z' without coords
+			resultPathArray.push([path[i]]);
+			continue;
+		}
+		var command = path[i].slice(0, 1);
+		var numbers = path[i].slice(1).split(',').map(function (number) {
+			return Number(number);
+		});
+		resultPathArray.push([command].concat(numbers));
+	}
+	return resultPathArray;
+}
+
+Path.fromArray = function (array) {
+	for (var i = 0; i < array.length; i++) {
+		var command = array[i][0];
+		var coords = array[i].slice(1, array[i].length);
+		array[i] = command + coords.join(',');
+	}
+	this.setAttribute('d', array.join(' '));
+}
+
 Path.translate = function (x, y) {
-    var path = this.getAttribute('d').split(' ');
-    var resultPath = '';
-    for (var i = 0; i < path.length; i++) {
-        var numberIndex = path[i].search(/[-0-9]+/);
-        if (numberIndex == -1) {
-            resultPath += path[i];
-            continue;
-        }
-        var buffer = path[i].slice(0, numberIndex);
-        var numbers = path[i].slice(numberIndex).split(',');
+	var pathArray = this.toArray();
+	for (var i = pathArray.length; i--;) {
+		if (pathArray[i].length == 1) continue;
+		pathArray[i] = pathArray[i].map(function (num, i) {
+			if (i == 0) return num;
+			return num + ((i % 2) ? x : y); // translate x and y coordinates
+		});
+	}
+	this.fromArray(pathArray);
 
-        numbers = numbers.map(function (num, i) {
-            return Number(num) + ((i == 0) ? x : y);
-        });
-        resultPath += buffer + numbers.join(',') + ' ';
-    }
-    this.setAttribute('d', resultPath.trim());
-
-    var rotate = ElementTransformer.getTransformAttribute(this, 'rotate');
-    if (rotate != undefined) {
-        ElementTransformer.setTransformAttribute(this, 'rotate', rotate[0] + ' ' + (rotate[1] + x) + ' ' + (rotate[2] + y));
-    }
-}
-
-Path.getPosition = function () {
-    var path = this.getAttribute('d').split(' ');
-    var x = undefined;
-    var y = undefined;
-    for (var i = 0; i < path.length; i++) {
-        var numberIndex = path[i].search(/[-0-9]+/);
-        if (numberIndex == -1) {
-            continue;
-        }
-        var buffer = path[i].slice(0, numberIndex);
-        var numbers = path[i].slice(numberIndex).split(',');
-        numbers = numbers.map(function (num, i) {
-            return Number(num);
-        });
-        if ((numbers[0] < x) || (x == undefined)) {
-            x = numbers[0];
-        }
-        if ((numbers[1] < y) || (y == undefined)) {
-            y = numbers[1];
-        }
-    }
-
-    return {
-        x: x,
-        y: y
-    }
-}
-
-Path.getSize = function () {
-    var path = this.getAttribute('d').split(' ');
-    var x = undefined;
-    var y = undefined;
-    var xMax = undefined;
-    var yMax = undefined;
-    for (var i = 0; i < path.length; i++) {
-        var numberIndex = path[i].search(/[-0-9]+/);
-        if (numberIndex == -1) {
-            continue;
-        }
-        var buffer = path[i].slice(0, numberIndex);
-        var numbers = path[i].slice(numberIndex).split(',');
-        numbers = numbers.map(function (num, i) {
-            return Number(num);
-        });
-        if ((numbers[0] < x) || (x == undefined)) {
-            x = numbers[0];
-        }
-        if ((numbers[1] < y) || (y == undefined)) {
-            y = numbers[1];
-        }
-        if ((numbers[0] > xMax) || (xMax == undefined)) {
-            xMax = numbers[0];
-        }
-        if ((numbers[1] > yMax) || (yMax == undefined)) {
-            yMax = numbers[1];
-        }
-    }
-
-    return {
-        width: xMax - x,
-        height: yMax - y
-    }
-}
-
-Path.setPosition = function (x, y) {
-    var oldPos = this.getPosition();
-    var dx = x - oldPos.x;
-    var dy = y - oldPos.y;
-    this.translate(dx, dy);
-}
-
-Path.setSize = function (width, height) {
-    var oldSize = this.getSize();
-    this.scale(width / oldSize.width, height / oldSize.height);
+	var rotate = ElementTransformer.getTransformAttribute(this, 'rotate');
+	if (rotate != undefined) {
+		ElementTransformer.setTransformAttribute(this, 'rotate', rotate[0] + ' ' + (rotate[1] + x) + ' ' + (rotate[2] + y));
+	}
 }
 
 Path.scale = function (width, height) {
-    var size = this.getSize();
-    var posBefore = this.getPosition();
-    var scale = [width, height];
-    var path = this.getAttribute('d').split(' ');
-    var resultPath = '';
-    for (var i = 0; i < path.length; i++) {
-        var numberIndex = path[i].search(/[-0-9]+/);
-        if (numberIndex == -1) {
-            resultPath += path[i];
-            continue;
-        }
-        var buffer = path[i].slice(0, numberIndex);
-        var numbers = path[i].slice(numberIndex).split(',');
-        numbers = numbers.map(function (num, i) {
-            return Number(num) * scale[i];
-        });
-        resultPath += buffer + numbers.join(',') + ' ';
-    }
-    this.setAttribute('d', resultPath.trim());
-    var posAfter = this.getPosition();
-    var diffX = posAfter.x - posBefore.x;
-    var diffY = posAfter.y - posBefore.y;
-    this.translate(-diffX, -diffY);
-    var rotate = ElementTransformer.getTransformAttribute(this, 'rotate');
-    if (rotate != undefined) {
-        this.rotate(rotate[0]);
-    }
+	var posBefore = this.getPosition();
+	var pathArray = this.toArray();
+	for (var i = pathArray.length; i--;) {
+		if (pathArray[i].length == 1) continue;
+		pathArray[i] = pathArray[i].map(function (num, i) {
+			if (i == 0) return num;
+			return num * ((i % 2) ? width : height); // scale x and y coordinates
+		});
+	}
+	this.fromArray(pathArray);
+
+	var posAfter = this.getPosition();
+	var diffX = posAfter.x - posBefore.x;
+	var diffY = posAfter.y - posBefore.y;
+	this.translate(-diffX, -diffY);
+	var rotate = ElementTransformer.getTransformAttribute(this, 'rotate');
+	if (rotate != undefined) {
+		this.rotate(rotate[0]);
+	}
+}
+
+Path.getPosition = function () {
+	var pathArray = this.toArray();
+	var minX = undefined;
+	var minY = undefined;
+
+	for (var i = 0; i < pathArray.length; i++) {
+		var currPart = pathArray[i];
+		var currPartMinX = undefined;
+		var currPartMinY = undefined;
+		for (var j = 1; j < currPart.length; j++) {
+			if (j % 2) { //if it x value
+				currPartMinX = (currPartMinX == undefined) ? currPart[j] : ((currPart[j] < currPartMinX) ? currPart[j] : currPartMinX);
+			} else { //if it y value
+				currPartMinY = (currPartMinY == undefined) ? currPart[j] : ((currPart[j] < currPartMinY) ? currPart[j] : currPartMinY);
+			}
+		}
+		minX = (minX == undefined) ? currPartMinX : ((currPartMinX < minX) ? currPartMinX : minX);
+		minY = (minY == undefined) ? currPartMinY : ((currPartMinY < minY) ? currPartMinY : minY);
+	}
+
+	return {
+		x: minX,
+		y: minY
+	}
+}
+
+Path.getSize = function () {
+	var pathArray = this.toArray();
+	var maxX = undefined;
+	var maxY = undefined;
+
+	for (var i = 0; i < pathArray.length; i++) {
+		var currPart = pathArray[i];
+		var currPartMaxX = undefined;
+		var currPartMaxY = undefined;
+		for (var j = 1; j < currPart.length; j++) {
+			if (j % 2) { //if it x value
+				currPartMaxX = (currPartMaxX == undefined) ? currPart[j] : ((currPart[j] > currPartMaxX) ? currPart[j] : currPartMaxX);
+			} else { //if it y value
+				currPartMaxY = (currPartMaxY == undefined) ? currPart[j] : ((currPart[j] > currPartMaxY) ? currPart[j] : currPartMaxY);
+			}
+		}
+		maxX = (maxX == undefined) ? currPartMaxX : ((currPartMaxX > maxX) ? currPartMaxX : maxX);
+		maxY = (maxY == undefined) ? currPartMaxY : ((currPartMaxY > maxY) ? currPartMaxY : maxY);
+	}
+
+	var pos = this.getPosition();
+	return {
+		width: maxX - pos.x,
+		height: maxY - pos.y
+	}
+}
+
+Path.setPosition = function (x, y) {
+	var oldPos = this.getPosition();
+	var dx = x - oldPos.x;
+	var dy = y - oldPos.y;
+	this.translate(dx, dy);
+}
+
+Path.setSize = function (width, height) {
+	var oldSize = this.getSize();
+	this.scale(width / oldSize.width, height / oldSize.height);
 }
 
 Path.rotate = function (angle) {
-    var elPos = this.getPosition();
-    var elSize = this.getSize();
-    var centerX = elPos.x + elSize.width / 2;
-    var centerY = elPos.y + elSize.height / 2;
-    ElementTransformer.setTransformAttribute(this, 'rotate', angle + ' ' + centerX + ' ' + centerY);
+	var elPos = this.getPosition();
+	var elSize = this.getSize();
+	var centerX = elPos.x + elSize.width / 2;
+	var centerY = elPos.y + elSize.height / 2;
+	ElementTransformer.setTransformAttribute(this, 'rotate', angle + ' ' + centerX + ' ' + centerY);
 };var Rect = new Object();
 
 Rect.translate = function (x, y) {
@@ -880,13 +879,9 @@ SvgEditor.prototype.getSelectedElement = function () {
 		this.dx = evtCoordinates.clientX - this.currentX;
 		this.dy = evtCoordinates.clientY - this.currentY;
 
-		// var elPos = this.lastSelectedElement.getPosition();
-		// var elSize = this.lastSelectedElement.getSize();
-		var attr = getElementNoRotateAttributes(this.lastSelectedElement);
-		var elPos = { x: attr.x, y: attr.y };
-		var elSize = { width: attr.width, height: attr.height };
-		var centerX = elPos.x + elSize.width / 2;
-		var centerY = elPos.y + elSize.height / 2;
+		var attribs = getElementNoRotateAttributes(this.lastSelectedElement);
+		var centerX = attribs.x + attribs.width / 2;
+		var centerY = attribs.y + attribs.height / 2;
 		var x = evtCoordinates.clientX - centerX;
 		var y = evtCoordinates.clientY - centerY;
 		var angle = -(180 + 90 - 180 / Math.PI * Math.atan2(y, x));

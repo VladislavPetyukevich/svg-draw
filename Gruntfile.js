@@ -8,7 +8,7 @@ module.exports = function (grunt) {
 				separator: ';',
 			},
 			dist: {
-				src: ['module_template/beginFile.js', 'src/**/*.js', 'module_template/endFile.js'],
+				src: ['module_template/banner.js', 'src/**/*.js', 'module_template/footer.js'],
 				dest: 'build/svgEditor.js',
 			},
 		},
