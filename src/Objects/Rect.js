@@ -7,6 +7,7 @@ Rect.translate = function (x, y) {
     if (rotate != undefined) {
         ElementTransformer.setTransformAttribute(this, 'rotate', rotate[0] + ' ' + (rotate[1] + x) + ' ' + (rotate[2] + y));
     }
+    return this;
 }
 
 Rect.getPosition = function () {
@@ -26,16 +27,19 @@ Rect.getSize = function () {
 Rect.setPosition = function (x, y) {
     this.setAttribute('x', x);
     this.setAttribute('y', y);
+    return this;
 }
 
 Rect.setSize = function (width, height) {
     this.setAttribute('width', width);
     this.setAttribute('height', height);
+    return this;
 }
 
 Rect.scale = function (width, height) {
     this.setAttribute('width', Number(this.getAttribute('width')) * width);
     this.setAttribute('height', Number(this.getAttribute('height')) * height);
+    return this;
 }
 
 Rect.rotate = function (angle) {
@@ -44,4 +48,5 @@ Rect.rotate = function (angle) {
     var centerX = elPos.x + elSize.width / 2;
     var centerY = elPos.y + elSize.height / 2
     ElementTransformer.setTransformAttribute(this, 'rotate', angle + ' ' + centerX + ' ' + centerY);
+    return this;
 }

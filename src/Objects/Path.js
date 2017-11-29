@@ -24,6 +24,7 @@ Path.fromArray = function (array) {
 		array[i] = command + coords.join(',');
 	}
 	this.setAttribute('d', array.join(' '));
+	return this;
 }
 
 Path.translate = function (x, y) {
@@ -41,6 +42,7 @@ Path.translate = function (x, y) {
 	if (rotate != undefined) {
 		ElementTransformer.setTransformAttribute(this, 'rotate', rotate[0] + ' ' + (rotate[1] + x) + ' ' + (rotate[2] + y));
 	}
+	return this;
 }
 
 Path.scale = function (width, height) {
@@ -63,6 +65,7 @@ Path.scale = function (width, height) {
 	if (rotate != undefined) {
 		this.rotate(rotate[0]);
 	}
+	return this;
 }
 
 Path.getPosition = function () {
@@ -123,11 +126,13 @@ Path.setPosition = function (x, y) {
 	var dx = x - oldPos.x;
 	var dy = y - oldPos.y;
 	this.translate(dx, dy);
+	return this;
 }
 
 Path.setSize = function (width, height) {
 	var oldSize = this.getSize();
 	this.scale(width / oldSize.width, height / oldSize.height);
+	return this;
 }
 
 Path.rotate = function (angle) {
@@ -136,4 +141,5 @@ Path.rotate = function (angle) {
 	var centerX = elPos.x + elSize.width / 2;
 	var centerY = elPos.y + elSize.height / 2;
 	ElementTransformer.setTransformAttribute(this, 'rotate', angle + ' ' + centerX + ' ' + centerY);
+	return this;
 }

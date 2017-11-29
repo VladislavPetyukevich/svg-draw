@@ -7,6 +7,7 @@ Ellipse.translate = function (x, y) {
     if (rotate != undefined) {
         ElementTransformer.setTransformAttribute(this, 'rotate', rotate[0] + ' ' + (rotate[1] + x) + ' ' + (rotate[2] + y));
     }
+    return this;
 }
 
 Ellipse.getPosition = function () {
@@ -32,11 +33,13 @@ Ellipse.setPosition = function (x, y) {
     var dx = x - oldPos.x;
     var dy = y - oldPos.y;
     this.translate(dx, dy);
+    return this;
 }
 
 Ellipse.setSize = function (width, height) {
     var oldSize = this.getSize();
     this.scale(width / oldSize.width, height / oldSize.height);
+    return this;
 }
 
 Ellipse.scale = function (width, height) {
@@ -50,6 +53,7 @@ Ellipse.scale = function (width, height) {
     this.setAttribute('ry', ry * height);
     this.setAttribute('cx', cx - diffWidth);
     this.setAttribute('cy', cy - diffHeight);
+    return this;
 }
 
 Ellipse.rotate = function (angle) {
@@ -58,4 +62,5 @@ Ellipse.rotate = function (angle) {
     var centerX = elPos.x + elSize.width / 2;
     var centerY = elPos.y + elSize.height / 2;
     ElementTransformer.setTransformAttribute(this, 'rotate', angle + ' ' + centerX + ' ' + centerY);
+    return this;
 }
