@@ -8,7 +8,7 @@ module.exports = function (grunt) {
 				separator: ';',
 			},
 			dist: {
-				src: ['module_template/banner.js', 'src/**/*.js', 'module_template/footer.js'],
+				src: ['src/**/*.js'],
 				dest: 'build/svgEditor.js',
 			},
 		},
@@ -19,6 +19,14 @@ module.exports = function (grunt) {
 				dest: 'build/svgEditor.min.js'
 			}
 		},
+
+		umd: {
+			all: {
+				src: 'build/svgEditor.js',
+				objectToExport: 'SvgEditor'
+			}
+		},
+
 		watch: {
 			options: {
 				livereload: true,
@@ -48,7 +56,8 @@ module.exports = function (grunt) {
 	grunt.loadNpmTasks('grunt-contrib-uglify');
 	grunt.loadNpmTasks('grunt-contrib-watch');
 	grunt.loadNpmTasks('grunt-contrib-connect');
+	grunt.loadNpmTasks('grunt-umd');
 
-	grunt.registerTask('build', ['concat', 'uglify']);
+	grunt.registerTask('build', ['concat', 'umd', 'uglify']);
 	grunt.registerTask('server', ['connect', 'watch']);
 }

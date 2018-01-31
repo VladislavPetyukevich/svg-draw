@@ -1,5 +1,21 @@
-;(function() {
-;var ControlElements = function (svgContainer, styles) {
+(function (root, factory) {
+  if (root === undefined && window !== undefined) root = window;
+  if (typeof define === 'function' && define.amd) {
+    // AMD. Register as an anonymous module unless amdModuleId is set
+    define([], function () {
+      return (root['SvgEditor'] = factory());
+    });
+  } else if (typeof module === 'object' && module.exports) {
+    // Node. Does not work with strict CommonJS, but
+    // only CommonJS-like environments that support module.exports,
+    // like Node.
+    module.exports = factory();
+  } else {
+    root['SvgEditor'] = factory();
+  }
+}(this, function () {
+
+var ControlElements = function (svgContainer, styles) {
 	this.svgContainer = svgContainer;
 	//Set default style values if they are not defined
 	styles = isVarExists(styles) ? styles : {};
@@ -301,6 +317,7 @@ Ellipse.translate = function (x, y) {
     if (rotate != undefined) {
         ElementTransformer.setTransformAttribute(this, 'rotate', rotate[0] + ' ' + (rotate[1] + x) + ' ' + (rotate[2] + y));
     }
+    return this;
 }
 
 Ellipse.getPosition = function () {
@@ -326,11 +343,13 @@ Ellipse.setPosition = function (x, y) {
     var dx = x - oldPos.x;
     var dy = y - oldPos.y;
     this.translate(dx, dy);
+    return this;
 }
 
 Ellipse.setSize = function (width, height) {
     var oldSize = this.getSize();
     this.scale(width / oldSize.width, height / oldSize.height);
+    return this;
 }
 
 Ellipse.scale = function (width, height) {
@@ -344,6 +363,7 @@ Ellipse.scale = function (width, height) {
     this.setAttribute('ry', ry * height);
     this.setAttribute('cx', cx - diffWidth);
     this.setAttribute('cy', cy - diffHeight);
+    return this;
 }
 
 Ellipse.rotate = function (angle) {
@@ -352,6 +372,7 @@ Ellipse.rotate = function (angle) {
     var centerX = elPos.x + elSize.width / 2;
     var centerY = elPos.y + elSize.height / 2;
     ElementTransformer.setTransformAttribute(this, 'rotate', angle + ' ' + centerX + ' ' + centerY);
+    return this;
 };var Path = new Object();
 
 Path.toArray = function () {
@@ -378,6 +399,7 @@ Path.fromArray = function (array) {
 		array[i] = command + coords.join(',');
 	}
 	this.setAttribute('d', array.join(' '));
+	return this;
 }
 
 Path.translate = function (x, y) {
@@ -395,6 +417,7 @@ Path.translate = function (x, y) {
 	if (rotate != undefined) {
 		ElementTransformer.setTransformAttribute(this, 'rotate', rotate[0] + ' ' + (rotate[1] + x) + ' ' + (rotate[2] + y));
 	}
+	return this;
 }
 
 Path.scale = function (width, height) {
@@ -417,6 +440,7 @@ Path.scale = function (width, height) {
 	if (rotate != undefined) {
 		this.rotate(rotate[0]);
 	}
+	return this;
 }
 
 Path.getPosition = function () {
@@ -477,11 +501,13 @@ Path.setPosition = function (x, y) {
 	var dx = x - oldPos.x;
 	var dy = y - oldPos.y;
 	this.translate(dx, dy);
+	return this;
 }
 
 Path.setSize = function (width, height) {
 	var oldSize = this.getSize();
 	this.scale(width / oldSize.width, height / oldSize.height);
+	return this;
 }
 
 Path.rotate = function (angle) {
@@ -490,6 +516,7 @@ Path.rotate = function (angle) {
 	var centerX = elPos.x + elSize.width / 2;
 	var centerY = elPos.y + elSize.height / 2;
 	ElementTransformer.setTransformAttribute(this, 'rotate', angle + ' ' + centerX + ' ' + centerY);
+	return this;
 };var Rect = new Object();
 
 Rect.translate = function (x, y) {
@@ -499,6 +526,7 @@ Rect.translate = function (x, y) {
     if (rotate != undefined) {
         ElementTransformer.setTransformAttribute(this, 'rotate', rotate[0] + ' ' + (rotate[1] + x) + ' ' + (rotate[2] + y));
     }
+    return this;
 }
 
 Rect.getPosition = function () {
@@ -518,16 +546,19 @@ Rect.getSize = function () {
 Rect.setPosition = function (x, y) {
     this.setAttribute('x', x);
     this.setAttribute('y', y);
+    return this;
 }
 
 Rect.setSize = function (width, height) {
     this.setAttribute('width', width);
     this.setAttribute('height', height);
+    return this;
 }
 
 Rect.scale = function (width, height) {
     this.setAttribute('width', Number(this.getAttribute('width')) * width);
     this.setAttribute('height', Number(this.getAttribute('height')) * height);
+    return this;
 }
 
 Rect.rotate = function (angle) {
@@ -536,6 +567,7 @@ Rect.rotate = function (angle) {
     var centerX = elPos.x + elSize.width / 2;
     var centerY = elPos.y + elSize.height / 2
     ElementTransformer.setTransformAttribute(this, 'rotate', angle + ' ' + centerX + ' ' + centerY);
+    return this;
 };var SVGObject = {
     rect: Rect,
     ellipse: Ellipse,
@@ -1038,12 +1070,7 @@ function prepareSvgCodeToSave(svgEl, width, height) {
 
 function isVarExists(variable) {
 	return typeof variable !== 'undefined';
-};
-if (typeof module !== 'undefined') {
-    module.exports = SvgEditor;
 }
+return SvgEditor;
 
-if (typeof window !== "undefined") {
-	window.SvgEditor = SvgEditor;
-}
-}());
+}));
