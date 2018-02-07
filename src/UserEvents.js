@@ -161,20 +161,7 @@ var UserEvents = function (cellSize, moveStep, controlElements) {
 		var rotate = ElementTransformer.getTransformAttribute(this.lastSelectedElement, 'rotate');
 		if (rotate != undefined) {
 			var rotate = ElementTransformer.getTransformAttribute(this.lastSelectedElement, 'rotate');
-			var attrib = getElementAttributes(this.lastSelectedElement);
 			this.lastSelectedElement.rotate(rotate[0]);
-			//update turned element position after change rotate center coordinates
-			// var newAttrib = getElementAttributes(this.lastSelectedElement);
-			// var dx = newAttrib.x - attrib.x;
-			// var dy = newAttrib.y - attrib.y;
-			// this.lastSelectedElement.translate(-dx, -dy);
-			// if (this.cellSize != undefined) {
-			// 	var pos = this.lastSelectedElement.getPosition();
-			// 	var newX = roundTo(pos.x, this.roundMoveStepNum);
-			// 	var newY = roundTo(pos.y, this.roundMoveStepNum);
-			// 	this.lastSelectedElement.setPosition(newX, newY);
-			// }
-
 			this.controlElements.update(this.lastSelectedElement);
 		}
 
