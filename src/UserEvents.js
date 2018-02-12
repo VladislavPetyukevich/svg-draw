@@ -160,8 +160,42 @@ var UserEvents = function (cellSize, moveStep, controlElements) {
 		//update rotate attribute
 		var rotate = ElementTransformer.getTransformAttribute(this.lastSelectedElement, 'rotate');
 		if (rotate != undefined) {
+			var newSize = this.lastSelectedElement.getSize();
+			var widthDelta = (oldoldSize.width - newSize.width) / 2;
+			var heightDelta = (oldoldSize.height - newSize.height) / 2;
 			var rotate = ElementTransformer.getTransformAttribute(this.lastSelectedElement, 'rotate');
 			this.lastSelectedElement.rotate(rotate[0]);
+			switch (rotate[0]) {
+				case -270:
+					if (widthDelta == 0) {
+						this.lastSelectedElement.translate(heightDelta, heightDelta);
+					} else if (heightDelta == 0) {
+						this.lastSelectedElement.translate(widthDelta, -widthDelta);
+					} else {
+						this.lastSelectedElement.translate(heightDelta, heightDelta);
+						this.lastSelectedElement.translate(widthDelta, -widthDelta);
+					}
+					break;
+				case -180:
+					if (widthDelta == 0) {
+						this.lastSelectedElement.translate(0, heightDelta * 2);
+					} else if (heightDelta == 0) {
+						this.lastSelectedElement.translate(widthDelta * 2, 0);
+					} else {
+						this.lastSelectedElement.translate(widthDelta * 2, heightDelta * 2);
+					}
+					break;
+				case -90:
+					if (widthDelta == 0) {
+						this.lastSelectedElement.translate(-heightDelta, heightDelta);
+					} else if (heightDelta == 0) {
+						this.lastSelectedElement.translate(widthDelta, widthDelta);
+					} else {
+						this.lastSelectedElement.translate(-heightDelta, heightDelta);
+						this.lastSelectedElement.translate(widthDelta, widthDelta);
+					}
+					break;
+			}
 			this.controlElements.update(this.lastSelectedElement);
 		}
 
