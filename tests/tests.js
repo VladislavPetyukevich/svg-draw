@@ -17,6 +17,13 @@ QUnit.test("Rect transformations", function (assert) {
 	assert.deepEqual(rect.getPosition(), { x: 40, y: 80 }, 'Correctly changes position');
 	rect.setSize(100, 40);
 	assert.deepEqual(rect.getSize(), { width: 100, height: 40 }, 'Correctly changes size');
+
+	rect.rotate(-270);
+	assert.deepEqual(rect.getPosition(), { x: 40, y: 80 }, 'Correct position after rotate by -270 degrees');
+	rect.rotate(-180);
+	assert.deepEqual(rect.getPosition(), { x: 40, y: 80 }, 'Correct position after rotate by -180 degrees');
+	rect.rotate(-90);
+	assert.deepEqual(rect.getPosition(), { x: 40, y: 80 }, 'Correct position after rotate by -90 degrees');
 });
 
 QUnit.test("Ellipse transformations", function (assert) {
@@ -30,6 +37,13 @@ QUnit.test("Ellipse transformations", function (assert) {
 	assert.deepEqual(ellipse.getPosition(), { x: 40, y: 80 }, 'Correctly changes position');
 	ellipse.setSize(100, 40);
 	assert.deepEqual(ellipse.getSize(), { width: 100, height: 40 }, 'Correctly changes size');
+
+	ellipse.rotate(-270);
+	assert.deepEqual(ellipse.getPosition(), { x: 40, y: 80 }, 'Correct position after rotate by -270 degrees');
+	ellipse.rotate(-180);
+	assert.deepEqual(ellipse.getPosition(), { x: 40, y: 80 }, 'Correct position after rotate by -180 degrees');
+	ellipse.rotate(-90);
+	assert.deepEqual(ellipse.getPosition(), { x: 40, y: 80 }, 'Correct position after rotate by -90 degrees');
 });
 
 QUnit.test("Triangle path transformations", function (assert) {
@@ -43,4 +57,11 @@ QUnit.test("Triangle path transformations", function (assert) {
 	assert.deepEqual(path.getPosition(), { x: 40, y: 80 }, 'Correctly changes position');
 	path.setSize(100, 40);
 	assert.deepEqual(path.getSize(), { width: 100, height: 40 }, 'Correctly changes size');
+
+	path.rotate(-270);
+	assert.deepEqual(path.getPosition(), { x: 40, y: 80 }, 'Correct position after rotate by -270 degrees');
+	path.rotate(-180);
+	assert.deepEqual(path.getPosition(), { x: 40, y: 80 }, 'Correct position after rotate by -180 degrees');
+	path.rotate(-90);
+	assert.deepEqual(path.getPosition(), { x: 40, y: 80 }, 'Correct position after rotate by -90 degrees');
 });
