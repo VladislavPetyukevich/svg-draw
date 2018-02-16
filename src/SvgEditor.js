@@ -1,7 +1,6 @@
 var SvgEditor = function (props) {
 	this.svgEl = props.svg;
 	this.cellSize = props.cellSize;
-	this.moveStep = props.step;
 
 	this.__addSvgStyles();
 	//init layers
@@ -16,7 +15,7 @@ var SvgEditor = function (props) {
 	this.initControlElementsLayer();
 
 	this.controlElements = new ControlElements(this.layers['controlElements'], props.controlElementsStyles);
-	this.userEvents = new UserEvents(this.cellSize, this.moveStep, this.controlElements);
+	this.userEvents = new UserEvents(this.cellSize, this.controlElements);
 	this.makeDraggable = this.userEvents.makeDraggable.bind(this.userEvents);
 	this.factory = Factory;
 	var click = function (evt) {

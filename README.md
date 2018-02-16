@@ -21,8 +21,7 @@ var props = {
 		rotateButtonColor: '#ff9933', //Default value: 'orange'
 		resizeButtonColor: '#330000' //Default value: 'black'
 	},
-	cellSize: 20, //Not necessary
-	step: 0.5 //Step of snapping to grid. Not necessary
+	cellSize: 20 //Not necessary
 };
 var editor = new SvgEditor(props);
 //Adding rect

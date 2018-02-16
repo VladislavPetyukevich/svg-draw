@@ -1,4 +1,4 @@
-var UserEvents = function (cellSize, moveStep, controlElements) {
+var UserEvents = function (cellSize, controlElements) {
 	this.selectedElement = undefined;
 	this.selectedElementClone = undefined;
 	this.lastSelectedElement = undefined;
@@ -13,10 +13,6 @@ var UserEvents = function (cellSize, moveStep, controlElements) {
 	this.currentY = 0;
 	this.controlElements = controlElements;
 	this.cellSize = cellSize;
-	this.baseElementSize = (this.cellSize != undefined) ? this.cellSize : 20;
-	this.moveStep = moveStep;
-	if (this.cellSize != undefined)
-		this.roundMoveStepNum = (this.moveStep != undefined) ? this.cellSize * this.moveStep : this.cellSize;
 
 	//Select element event
 	this.selectElement = (function (evt) {
@@ -66,8 +62,8 @@ var UserEvents = function (cellSize, moveStep, controlElements) {
 				translate = [];
 				translate[0] = translate[1] = 0;
 			}
-			var newX = roundTo(translate[0], this.roundMoveStepNum);
-			var newY = roundTo(translate[1], this.roundMoveStepNum);
+			var newX = roundTo(translate[0], this.cellSize / 2);
+			var newY = roundTo(translate[1], this.cellSize / 2);
 			ElementTransformer.setTransformAttribute(this.selectedElementClone, 'translate', newX + ' ' + newY);
 		}
 		var translate = ElementTransformer.getTransformAttribute(this.selectedElementClone, 'translate');
@@ -151,8 +147,8 @@ var UserEvents = function (cellSize, moveStep, controlElements) {
 
 		if ((this.cellSize != undefined) && (this.lastSelectedElement.snapToGrid == true)) {
 			var size = this.lastSelectedElement.getSize();
-			var newWidth = roundTo(size.width, this.roundMoveStepNum);
-			var newHeight = roundTo(size.height, this.roundMoveStepNum);
+			var newWidth = roundTo(size.width, this.cellSize / 2);
+			var newHeight = roundTo(size.height, this.cellSize / 2);
 			this.lastSelectedElement.setSize(newWidth, newHeight);
 			this.controlElements.update(this.lastSelectedElement);
 		}
