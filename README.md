@@ -28,11 +28,6 @@ var editor = new SvgEditor(props);
 var rect = editor.factory.rect(
 	{ x: 40, y: 40, width: 80, height: 80, fill: '#0000FF' }
 );
-rect.hasControlElements = true;
-rect.resizable = true;
-rect.rotatable = true;
-rect.snapRotateToGrid = true;
-rect.snapToGrid = true;
 editor.makeDraggable(rect);
 editor.add(rect);
 ```

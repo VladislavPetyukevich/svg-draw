@@ -56,7 +56,7 @@ var UserEvents = function (cellSize, controlElements) {
 	//Finish move element event
 	this.deselectElement = (function (evt) {
 		if (this.selectedElementClone == undefined) return;
-		if ((this.cellSize != undefined) && (this.selectedElement.snapToGrid == true)) {
+		if (this.cellSize != undefined) {
 			var translate = ElementTransformer.getTransformAttribute(this.selectedElementClone, 'translate');
 			if (translate == undefined) {
 				translate = [];
@@ -73,9 +73,7 @@ var UserEvents = function (cellSize, controlElements) {
 		this.selectedElement.style.visibility = 'visible';
 		this.selectedElement.parentNode.removeChild(this.selectedElementClone);
 
-		if (this.selectedElement.hasControlElements == true) {
-			this.addControlElementsEvents(this.selectedElement);
-		}
+		this.addControlElementsEvents(this.selectedElement);
 
 		this.selectedElementClone.removeEventListener("mousemove", this.moveElement);
 		this.selectedElementClone.removeEventListener("mouseout", this.deselectElement);
@@ -145,7 +143,7 @@ var UserEvents = function (cellSize, controlElements) {
 		ElementTransformer.removeTransformAttribute(this.lastSelectedElement, 'scale');
 		ElementTransformer.removeTransformAttribute(this.lastSelectedElement, 'translate');
 
-		if ((this.cellSize != undefined) && (this.lastSelectedElement.snapToGrid == true)) {
+		if (this.cellSize) {
 			var size = this.lastSelectedElement.getSize();
 			var newWidth = roundTo(size.width, this.cellSize / 2);
 			var newHeight = roundTo(size.height, this.cellSize / 2);
@@ -237,7 +235,7 @@ var UserEvents = function (cellSize, controlElements) {
 	//End of rotate element
 	this.finishRotate = (function (evt) {
 		var rotate = ElementTransformer.getTransformAttribute(this.lastSelectedElement, 'rotate');
-		if ((this.lastSelectedElement.snapRotateToGrid) && (rotate != undefined)) {
+		if (rotate) {
 			var angle = rotate[0];
 			var newAngle = roundTo(angle, 45);
 			ElementTransformer.setTransformAttribute(this.lastSelectedElement, 'rotate', newAngle + ' ' + rotate[1] + ' ' + rotate[2]);

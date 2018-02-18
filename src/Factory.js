@@ -35,16 +35,6 @@ var Factory = {
 
 	createFromDOM: function (DOM_Rect) {
 		var attributes = DOM_Rect.attributes;
-		var originalAttributesNames = ['hasControlElements', 'resizable', 'rotatable', 'snapToGrid', 'snapRotateToGrid'];
-		var lowCaseAttributes = originalAttributesNames.map(function (el) { return el.toLowerCase(); });
-		for (var i = attributes.length; i--;) {
-			if (attributes[i].value == 'true') {
-				var attribIndex = lowCaseAttributes.indexOf(attributes[i].name);
-				if (attribIndex == -1) continue;
-				DOM_Rect[originalAttributesNames[attribIndex]] = !!attributes[i].value;
-				DOM_Rect.removeAttribute(attributes[i].name);
-			}
-		}
 		return Object.assign(DOM_Rect, SVGObject[DOM_Rect.nodeName]);
 	},
 };

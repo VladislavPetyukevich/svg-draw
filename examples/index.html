@@ -66,11 +66,6 @@
 			var rect = editor.factory.rect(
 				{ x: 0, y: 0, width: 80, height: 80, fill: '#0000FF' }
 			);
-			rect.hasControlElements = true;
-			rect.resizable = true;
-			rect.rotatable = true;
-			rect.snapToGrid = true;
-			rect.snapRotateToGrid = true;
 			editor.makeDraggable(rect);
 			editor.add(rect);
 		});
@@ -80,26 +75,16 @@
 			var ellipse = editor.factory.ellipse(
 				{ x: 0, y: 0, width: 80, height: 80, fill: '#FF00FF' }
 			);
-			ellipse.hasControlElements = true;
-			ellipse.resizable = true;
-			ellipse.rotatable = true;
-			ellipse.snapToGrid = true;
-			ellipse.snapRotateToGrid = true;
 			editor.makeDraggable(ellipse);
 			editor.add(ellipse);
 		});
 
-		// editor.loadFromSvg('<svg xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400"><!-- Created with SVG-edit - http://someurl.com --><rect x="80" y="80" width="160" height="160" fill="#0000FF" class="draggableSvg" style="position:relative;" transform="" snaprotatetogrid="true" snaptogrid="true" rotatable="true" resizable="true" hascontrolelements="true"/><path d="M80,80 L120,0 L160,80 Z" fill="#FF0000" class="draggableSvg" style="position:relative;" transform="" snaprotatetogrid="true" snaptogrid="true" resizable="true" hascontrolelements="true"/><path d="M160,80 L200,0 L240,80 Z" fill="#FF0000" class="draggableSvg" style="position:relative;" transform="" snaprotatetogrid="true" snaptogrid="true" rotatable="true" hascontrolelements="true"/></svg>');
+		// editor.loadFromSvg('<svg xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400"><!-- Created with SVG-edit - http://someurl.com --><rect x="80" y="80" width="160" height="160" fill="#0000FF" class="draggableSvg" style="position:relative;" transform=""/><path d="M80,80 L120,0 L160,80 Z" fill="#FF0000" class="draggableSvg" style="position:relative;" transform=""/><path d="M160,80 L200,0 L240,80 Z" fill="#FF0000" class="draggableSvg" style="position:relative;" transform=""/></svg>');
 
 		addPathButton.addEventListener('click', function () {
 			var path = editor.factory.path(
 				{ type: 'path', x: 0, y: 0, width: 80, height: 80, d: 'M0,40 L20,0 L40,40 Z', fill: '#FF0000' }
 			);
-			path.hasControlElements = true;
-			path.resizable = true;
-			path.rotatable = true;
-			path.snapToGrid = true;
-			path.snapRotateToGrid = true;
 			editor.makeDraggable(path);
 			editor.add(path);
 		});

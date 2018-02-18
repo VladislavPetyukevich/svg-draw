@@ -35,18 +35,8 @@ ControlElements.prototype.update = function (targetEl) {
 	}
 	var halfSize = this.styles.size / 2;
 	ElementTransformer.setTranslate(this.closeButton, elPos.x + elSize.width - halfSize, elPos.y - halfSize);
-
-	if (targetEl.resizable) {
-		ElementTransformer.setTranslate(this.resizeButton, elPos.x + elSize.width - halfSize, elPos.y + elSize.height - halfSize);
-	} else {
-		ElementTransformer.setTranslate(this.resizeButton, -this.styles.size, -this.styles.size);
-	}
-
-	if (targetEl.rotatable) {
-		ElementTransformer.setTranslate(this.rotateButton, elPos.x - halfSize + elSize.width / 2, elPos.y - halfSize);
-	} else {
-		ElementTransformer.setTranslate(this.rotateButton, -this.styles.size, -this.styles.size);
-	}
+	ElementTransformer.setTranslate(this.resizeButton, elPos.x + elSize.width - halfSize, elPos.y + elSize.height - halfSize);
+	ElementTransformer.setTranslate(this.rotateButton, elPos.x - halfSize + elSize.width / 2, elPos.y - halfSize);
 
 	var point1 = {
 		x: elPos.x,
