@@ -2,7 +2,6 @@ var UserEvents = function (cellSize, controlElements) {
 	this.selectedElement = undefined;
 	this.selectedElementClone = undefined;
 	this.lastSelectedElement = undefined;
-	this.eventHandlers = [];
 	this.dx = 0;
 	this.dy = 0;
 	this.currentX = 0;
@@ -81,9 +80,9 @@ var UserEvents = function (cellSize, controlElements) {
 		this.selectedElementClone = undefined;
 		this.selectedElement = undefined;
 
-		if (this.eventHandlers['onMove']) this.eventHandlers['onMove']();
-		if (this.eventHandlers['onSelect']) this.eventHandlers['onSelect']();
-		if (this.eventHandlers['onChange']) this.eventHandlers['onChange']();
+		if (this.onMove) this.onMove();
+		if (this.onSelect) this.onSelect();
+		if (this.onChange) this.onChange();
 	}).bind(this);
 
 	//Mouse down on resize button
@@ -194,8 +193,8 @@ var UserEvents = function (cellSize, controlElements) {
 		removeEventListener("mouseup", this.finishResize);
 		removeEventListener("touchend", this.finishResize);
 
-		if (this.eventHandlers['onResize']) this.eventHandlers['onResize']();
-		if (this.eventHandlers['onChange']) this.eventHandlers['onChange']();
+		if (this.onResize) this.onResize();
+		if (this.onChange) this.onChange();
 	}).bind(this);
 
 	//Mouse down on rotate button
@@ -243,8 +242,8 @@ var UserEvents = function (cellSize, controlElements) {
 		removeEventListener("mouseup", this.finishRotate);
 		removeEventListener("touchend", this.finishRotate);
 
-		if (this.eventHandlers['onRotate']) this.eventHandlers['onRotate']();
-		if (this.eventHandlers['onChange']) this.eventHandlers['onChange']();
+		if (this.onRotate) this.onRotate();
+		if (this.onChange) this.onChange();
 	}).bind(this);
 
 	this.removeElement = (function (evt) {
@@ -253,7 +252,7 @@ var UserEvents = function (cellSize, controlElements) {
 		userCanvas.removeChild(this.lastSelectedElement);
 		this.lastSelectedElement = undefined;
 
-		if (this.eventHandlers['onChange']) this.eventHandlers['onChange']();
+		if (this.onChange) this.onChange();
 	}).bind(this);
 }
 
@@ -279,24 +278,4 @@ UserEvents.prototype.addControlElementsEvents = function (el) {
 	this.controlElements.rotateButton.addEventListener('touchstart', this.startRotate);
 
 	controlElementsLayer.appendChild(controlElements);
-}
-
-UserEvents.prototype.onChange = function (handler) {
-	this.eventHandlers['onChange'] = handler;
-}
-
-UserEvents.prototype.onSelect = function (handler) {
-	this.eventHandlers['onSelect'] = handler;
-}
-
-UserEvents.prototype.onMove = function (handler) {
-	this.eventHandlers['onMove'] = handler;
-}
-
-UserEvents.prototype.onResize = function (handler) {
-	this.eventHandlers['onResize'] = handler;
-}
-
-UserEvents.prototype.onRotate = function (handler) {
-	this.eventHandlers['onRotate'] = handler;
 }

@@ -129,10 +129,10 @@
 			}
 			colorSelector.setAttribute('value', selectedElement.getAttribute('fill'));
 		}
-		editor.userEvents.onChange(changeListener);
-		// editor.userEvents.onResize(changeListener);
-		// editor.userEvents.onMove(changeListener);
-		// editor.userEvents.onRotate(changeListener);
+		editor.userEvents.onChange = changeListener;
+		// editor.userEvents.onResize = changeListener;
+		// editor.userEvents.onMove = changeListener;
+		// editor.userEvents.onRotate = changeListener;
 
 		var downloadImageLink = document.getElementById('downloadImageLink');
 		downloadImageLink.addEventListener('click', (function (evt) {
