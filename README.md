@@ -28,6 +28,5 @@ var editor = new SvgEditor(props);
 var rect = editor.factory.rect(
 	{ x: 40, y: 40, width: 80, height: 80, fill: '#0000FF' }
 );
-editor.makeDraggable(rect);
 editor.add(rect);
 ```
