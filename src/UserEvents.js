@@ -2,11 +2,7 @@ var UserEvents = function (cellSize, controlElements) {
 	this.selectedElement = undefined;
 	this.selectedElementClone = undefined;
 	this.lastSelectedElement = undefined;
-	this.onChangeHandler = undefined;
-	this.onSelectHandler = undefined;
-	this.onResizeHandler = undefined;
-	this.onMoveHandler = undefined;
-	this.onRotateHandler = undefined;
+	this.eventHandlers = [];
 	this.dx = 0;
 	this.dy = 0;
 	this.currentX = 0;
@@ -85,9 +81,9 @@ var UserEvents = function (cellSize, controlElements) {
 		this.selectedElementClone = undefined;
 		this.selectedElement = undefined;
 
-		if (this.onMoveHandler != undefined) this.onMoveHandler();
-		if (this.onSelectHandler != undefined) this.onSelectHandler();
-		if (this.onChangeHandler != undefined) this.onChangeHandler();
+		if (this.eventHandlers['onMove']) this.eventHandlers['onMove']();
+		if (this.eventHandlers['onSelect']) this.eventHandlers['onSelect']();
+		if (this.eventHandlers['onChange']) this.eventHandlers['onChange']();
 	}).bind(this);
 
 	//Mouse down on resize button
@@ -198,8 +194,8 @@ var UserEvents = function (cellSize, controlElements) {
 		removeEventListener("mouseup", this.finishResize);
 		removeEventListener("touchend", this.finishResize);
 
-		if (this.onResizeHandler != undefined) this.onResizeHandler();
-		if (this.onChangeHandler != undefined) this.onChangeHandler();
+		if (this.eventHandlers['onResize']) this.eventHandlers['onResize']();
+		if (this.eventHandlers['onChange']) this.eventHandlers['onChange']();
 	}).bind(this);
 
 	//Mouse down on rotate button
@@ -247,8 +243,8 @@ var UserEvents = function (cellSize, controlElements) {
 		removeEventListener("mouseup", this.finishRotate);
 		removeEventListener("touchend", this.finishRotate);
 
-		if (this.onRotateHandler != undefined) this.onRotateHandler();
-		if (this.onChangeHandler != undefined) this.onChangeHandler();
+		if (this.eventHandlers['onRotate']) this.eventHandlers['onRotate']();
+		if (this.eventHandlers['onChange']) this.eventHandlers['onChange']();
 	}).bind(this);
 
 	this.removeElement = (function (evt) {
@@ -257,7 +253,7 @@ var UserEvents = function (cellSize, controlElements) {
 		userCanvas.removeChild(this.lastSelectedElement);
 		this.lastSelectedElement = undefined;
 
-		if (this.onChangeHandler != undefined) this.onChangeHandler();
+		if (this.eventHandlers['onChange']) this.eventHandlers['onChange']();
 	}).bind(this);
 }
 
@@ -286,21 +282,21 @@ UserEvents.prototype.addControlElementsEvents = function (el) {
 }
 
 UserEvents.prototype.onChange = function (handler) {
-	this.onChangeHandler = handler;
+	this.eventHandlers['onChange'] = handler;
 }
 
 UserEvents.prototype.onSelect = function (handler) {
-	this.onSelectHandler = handler;
+	this.eventHandlers['onSelect'] = handler;
 }
 
 UserEvents.prototype.onMove = function (handler) {
-	this.onMoveHandler = handler;
+	this.eventHandlers['onMove'] = handler;
 }
 
 UserEvents.prototype.onResize = function (handler) {
-	this.onResizeHandler = handler;
+	this.eventHandlers['onResize'] = handler;
 }
 
 UserEvents.prototype.onRotate = function (handler) {
-	this.onRotateHandler = handler;
+	this.eventHandlers['onRotate'] = handler;
 }
