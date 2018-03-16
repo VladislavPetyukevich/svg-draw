@@ -66,7 +66,6 @@
 			var rect = editor.factory.rect(
 				{ x: 0, y: 0, width: 80, height: 80, fill: '#0000FF' }
 			);
-			editor.makeDraggable(rect);
 			editor.add(rect);
 		});
 		//addRectButton.click();
@@ -75,7 +74,6 @@
 			var ellipse = editor.factory.ellipse(
 				{ x: 0, y: 0, width: 80, height: 80, fill: '#FF00FF' }
 			);
-			editor.makeDraggable(ellipse);
 			editor.add(ellipse);
 		});
 
@@ -85,7 +83,6 @@
 			var path = editor.factory.path(
 				{ type: 'path', x: 0, y: 0, width: 80, height: 80, d: 'M0,40 L20,0 L40,40 Z', fill: '#FF0000' }
 			);
-			editor.makeDraggable(path);
 			editor.add(path);
 		});
 

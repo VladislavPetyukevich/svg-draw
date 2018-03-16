@@ -16,7 +16,6 @@ var SvgEditor = function (props) {
 
 	this.controlElements = new ControlElements(this.layers['controlElements'], props.controlElementsStyles);
 	this.userEvents = new UserEvents(this.cellSize, this.controlElements);
-	this.makeDraggable = this.userEvents.makeDraggable.bind(this.userEvents);
 	this.factory = Factory;
 	var click = function (evt) {
 		if ((evt.target != this.svgEl) || (this.userEvents.controlElements == undefined)) return;
@@ -89,9 +88,7 @@ SvgEditor.prototype.loadFromSvg = function (svgData) {
 		if (svgChild[i].nodeType === Node.COMMENT_NODE) continue;
 		if (Object.keys(SVGObject).indexOf(svgChild[i].nodeName) == -1) continue;
 		var el = this.factory.createFromDOM(svgChild[i]);
-		if (el.getAttribute('class') == 'draggableSvg') {
-			this.userEvents.makeDraggable(el);
-		}
+		this.userEvents.makeDraggable(el);
 		this.layers['userCanvas'].insertBefore(el, this.layers['userCanvas'].firstChild)
 	}
 }
@@ -123,6 +120,7 @@ SvgEditor.prototype.getImageLink = function () {
 
 SvgEditor.prototype.add = function (object) {
 	this.layers['userCanvas'].appendChild(object);
+	this.userEvents.makeDraggable(object);
 	if (this.userEvents.onChangeHandler != undefined) this.userEvents.onChangeHandler();
 }
 
