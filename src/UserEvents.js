@@ -15,6 +15,7 @@ var UserEvents = function (cellSize, controlElements) {
 		this.selectedElement = evt.target;
 		this.selectedElementClone = this.selectedElement.cloneNode();
 		this.selectedElementClone.innerHTML = this.selectedElement.innerHTML;
+		this.selectedElementClone.dataset.dontHandle = true;
 		this.selectedElement.parentNode.appendChild(this.selectedElementClone);
 		this.selectedElement.style.visibility = 'hidden';
 		if (this.controlElements != undefined) {
@@ -79,10 +80,6 @@ var UserEvents = function (cellSize, controlElements) {
 		this.lastSelectedElement = this.selectedElement;
 		this.selectedElementClone = undefined;
 		this.selectedElement = undefined;
-
-		if (this.onMove) this.onMove();
-		if (this.onSelect) this.onSelect();
-		if (this.onChange) this.onChange();
 	}).bind(this);
 
 	//Mouse down on resize button
@@ -98,6 +95,7 @@ var UserEvents = function (cellSize, controlElements) {
 	//Resizing element
 	this.resize = (function (evt) {
 		if (evt.button == 2) return;
+		this.lastSelectedElement.dataset.dontHandle = true;
 		var evtCoordinates = getEventCoordinates(evt);
 		this.dx = evtCoordinates.clientX - this.currentX;
 		this.dy = evtCoordinates.clientY - this.currentY;
@@ -130,6 +128,7 @@ var UserEvents = function (cellSize, controlElements) {
 
 	//End of resizing element
 	this.finishResize = (function (evt) {
+		delete this.lastSelectedElement.dataset.dontHandle;
 		var oldoldSize = this.lastSelectedElement.getSize();
 		var scale = ElementTransformer.getTransformAttribute(this.lastSelectedElement, 'scale');
 		var size = this.lastSelectedElement.getSize();
@@ -192,9 +191,6 @@ var UserEvents = function (cellSize, controlElements) {
 		removeEventListener("touchmove", this.resize);
 		removeEventListener("mouseup", this.finishResize);
 		removeEventListener("touchend", this.finishResize);
-
-		if (this.onResize) this.onResize();
-		if (this.onChange) this.onChange();
 	}).bind(this);
 
 	//Mouse down on rotate button
@@ -212,6 +208,7 @@ var UserEvents = function (cellSize, controlElements) {
 	//Rotate element
 	this.rotate = (function (evt) {
 		if (evt.button == 2) return;
+		this.lastSelectedElement.dataset.dontHandle = true;
 		var evtCoordinates = getEventCoordinates(evt);
 		this.dx = evtCoordinates.clientX - this.currentX;
 		this.dy = evtCoordinates.clientY - this.currentY;
@@ -229,6 +226,7 @@ var UserEvents = function (cellSize, controlElements) {
 
 	//End of rotate element
 	this.finishRotate = (function (evt) {
+		delete this.lastSelectedElement.dataset.dontHandle;
 		var rotate = ElementTransformer.getTransformAttribute(this.lastSelectedElement, 'rotate');
 		if (rotate) {
 			var angle = rotate[0];
@@ -241,9 +239,6 @@ var UserEvents = function (cellSize, controlElements) {
 		removeEventListener("touchmove", this.rotate);
 		removeEventListener("mouseup", this.finishRotate);
 		removeEventListener("touchend", this.finishRotate);
-
-		if (this.onRotate) this.onRotate();
-		if (this.onChange) this.onChange();
 	}).bind(this);
 
 	this.removeElement = (function (evt) {
@@ -251,8 +246,6 @@ var UserEvents = function (cellSize, controlElements) {
 		this.controlElements.hide();
 		userCanvas.removeChild(this.lastSelectedElement);
 		this.lastSelectedElement = undefined;
-
-		if (this.onChange) this.onChange();
 	}).bind(this);
 }
 

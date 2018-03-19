@@ -17,6 +17,11 @@ var SvgEditor = function (props) {
 	this.controlElements = new ControlElements(this.layers['controlElements'], props.controlElementsStyles);
 	this.userEvents = new UserEvents(this.cellSize, this.controlElements);
 	this.factory = Factory;
+
+	// changes handle
+	this.onChange = undefined;
+	this.initChangesObserver();
+
 	var click = function (evt) {
 		if ((evt.target != this.svgEl) || (this.userEvents.controlElements == undefined)) return;
 		this.userEvents.controlElements.hide();
@@ -126,4 +131,30 @@ SvgEditor.prototype.add = function (object) {
 
 SvgEditor.prototype.getSelectedElement = function () {
 	return this.userEvents.lastSelectedElement;
+}
+
+SvgEditor.prototype.initChangesObserver = function () {
+	var observerCallback = (function (mutations) {
+		var that = this;
+		var isMutationShouldHandle = false;
+
+		mutations.forEach(function (mutation) {
+			if (mutation.target == that.layers['userCanvas']) {
+				mutation.addedNodes.forEach(function (node) {
+					isMutationShouldHandle = node.dataset.dontHandle !== 'true'
+				});
+				mutation.removedNodes.forEach(function (node) {
+					isMutationShouldHandle = node.dataset.dontHandle !== 'true'
+				});
+			}
+		});
+
+		if (isMutationShouldHandle && (typeof that.onChange == 'function')) {
+			that.onChange();
+		}
+	}).bind(this);
+
+	this.observer = new MutationObserver(observerCallback);
+	var config = { subtree: true, attributes: true, childList: true, characterData: true };
+	this.observer.observe(this.svgEl, config);
 }
