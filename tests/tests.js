@@ -65,3 +65,15 @@ QUnit.test("Triangle path transformations", function (assert) {
 	path.rotate(-90);
 	assert.deepEqual(path.getPosition(), { x: 40, y: 80 }, 'Correct position after rotate by -90 degrees');
 });
+
+QUnit.test("Event hander", function (assert) {
+	var done = assert.async();
+	var onChangeHandler = function () {
+		assert.equal(true, true);
+		done();
+	};
+	editor.onChange = onChangeHandler;
+
+	var rect = editor.factory.rect({ x: 20, y: 40, width: 80, height: 20, fill: '#0000FF' });
+	editor.add(rect);
+});
