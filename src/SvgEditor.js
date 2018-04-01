@@ -136,15 +136,15 @@ SvgEditor.prototype.getSelectedElement = function () {
 SvgEditor.prototype.initChangesObserver = function () {
 	var observerCallback = (function (mutations) {
 		var that = this;
-		var isMutationShouldHandle = false;
+		var isMutationShouldHandle = true;
 
 		mutations.forEach(function (mutation) {
 			if (mutation.target == that.layers['userCanvas']) {
 				mutation.addedNodes.forEach(function (node) {
-					isMutationShouldHandle = node.dataset.dontHandle !== 'true'
+					isMutationShouldHandle = !(node.dataset.dontHandle == 'true')
 				});
 				mutation.removedNodes.forEach(function (node) {
-					isMutationShouldHandle = node.dataset.dontHandle !== 'true'
+					isMutationShouldHandle = !(node.dataset.dontHandle == 'true')
 				});
 			}
 		});
