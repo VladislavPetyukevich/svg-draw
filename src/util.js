@@ -2,6 +2,10 @@ var roundTo = function (number, round) {
 	return Math.round(number / round) * round;
 }
 
+function nodeListToArray(nodesList) {
+  return Array.prototype.slice.call(nodesList);
+}
+
 function rotateVector(vector, angle) {
 	var theta = angle * 0.017453292519943295; // (angle / 180) * Math.PI;
 	var cos = Math.cos(theta);

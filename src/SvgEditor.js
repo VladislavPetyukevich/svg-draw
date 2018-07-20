@@ -135,22 +135,21 @@ SvgEditor.prototype.getSelectedElement = function () {
 
 SvgEditor.prototype.initChangesObserver = function () {
 	var observerCallback = (function (mutations) {
-		var that = this;
-		var isMutationShouldHandle = true;
+    var isMutationShouldHandle = false;
 
-		mutations.forEach(function (mutation) {
-			if (mutation.target == that.layers['userCanvas']) {
-				mutation.addedNodes.forEach(function (node) {
-					isMutationShouldHandle = !(node.dataset.dontHandle == 'true')
-				});
-				mutation.removedNodes.forEach(function (node) {
-					isMutationShouldHandle = !(node.dataset.dontHandle == 'true')
-				});
+    for (var key in mutations) {
+      var mutation = mutations[key];
+			if (mutation.target == this.layers['userCanvas']) {
+        var targetNode = [].concat(nodeListToArray(mutation.addedNodes), nodeListToArray(mutation.removedNodes))[0];
+        if(targetNode.dataset['dontHandle'] !== 'true') {
+          isMutationShouldHandle = true;
+          break;
+        }
 			}
-		});
+    }
 
-		if (isMutationShouldHandle && (typeof that.onChange == 'function')) {
-			that.onChange();
+		if (isMutationShouldHandle && (typeof this.onChange == 'function')) {
+			this.onChange();
 		}
 	}).bind(this);
 
