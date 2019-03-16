@@ -42,17 +42,6 @@ export function getElementNoRotateAttributes(el) {
   return attributes;
 }
 
-function getSafeAttributeName(name) {
-  var result = '' + name;
-  if (result.indexOf('-') == -1) return result;
-
-  var arr = result.split('-');
-  for (var i = 1; i < arr.length; i++) {
-    arr[i] = arr[i].toUpperCase()[0] + arr[i].slice(1);
-  }
-  return arr.join('')
-}
-
 export function getEventCoordinates(event) {
   if (isVarExists(event.touches)) {
     return event.touches[0];
