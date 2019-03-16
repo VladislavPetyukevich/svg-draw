@@ -1,4 +1,5 @@
 import ElementTransformer from './ElementTransformer';
+import Coordinates from './DataStructures/Coordinates';
 import { getEventCoordinates, getElementNoRotateAttributes, rotateVector, roundTo } from './util';
 
 var UserEvents = function (cellSize, controlElements) {
@@ -43,7 +44,7 @@ var UserEvents = function (cellSize, controlElements) {
     this.dx += evtCoordinates.clientX - this.currentX;
     this.dy += evtCoordinates.clientY - this.currentY;
 
-    ElementTransformer.addTranslate(this.selectedElementClone, { x: this.dx, y: this.dy });
+    ElementTransformer.addTranslate(this.selectedElementClone, new Coordinates(this.dx, this.dy));
 
     this.dx = 0;
     this.dy = 0;
@@ -102,10 +103,10 @@ var UserEvents = function (cellSize, controlElements) {
     var evtCoordinates = getEventCoordinates(evt);
     this.dx = evtCoordinates.clientX - this.currentX;
     this.dy = evtCoordinates.clientY - this.currentY;
-    var scaleVector = {
-      x: this.dx / this.lastSelectedElement.getBBox().width,
-      y: this.dy / this.lastSelectedElement.getBBox().height
-    }
+    var scaleVector = new Coordinates(
+      this.dx / this.lastSelectedElement.getBBox().width,
+      this.dy / this.lastSelectedElement.getBBox().height
+    );
     var elPos = this.lastSelectedElement.getPosition();
 
     var rotate = ElementTransformer.getTransformAttribute(this.lastSelectedElement, 'rotate');

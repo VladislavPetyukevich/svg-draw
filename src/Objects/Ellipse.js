@@ -1,4 +1,5 @@
 import ElementTransformer from '../ElementTransformer';
+import Coordinates from '../DataStructures/Coordinates';
 
 var Ellipse = new Object();
 
@@ -61,9 +62,11 @@ Ellipse.scale = function (width, height) {
 Ellipse.rotate = function (angle) {
   var elPos = this.getPosition();
   var elSize = this.getSize();
-  var centerX = elPos.x + elSize.width / 2;
-  var centerY = elPos.y + elSize.height / 2;
-  ElementTransformer.setTransformAttribute(this, 'rotate', angle + ' ' + centerX + ' ' + centerY);
+  var centerCoordinates = new Coordinates(
+    elPos.x + elSize.width / 2,
+    elPos.y + elSize.height / 2
+  );
+  ElementTransformer.rotate(this, centerCoordinates, angle);
   return this;
 }
 

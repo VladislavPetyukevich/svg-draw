@@ -91,8 +91,8 @@ ElementTransformer.addTranslate = function (element, coordinates) {
   ElementTransformer.setTransformAttribute(element, 'translate', newTranslate);
 }
 
-ElementTransformer.setTranslate = function (element, x, y) {
-  ElementTransformer.setTransformAttribute(element, 'translate', x + ' ' + y);
+ElementTransformer.setTranslate = function (element, coordinates) {
+  ElementTransformer.setTransformAttribute(element, 'translate', coordinates.x + ' ' + coordinates.y);
 }
 
 ElementTransformer.getTranslate = function (element) {
@@ -129,8 +129,8 @@ ElementTransformer.getScale = function (element) {
   }
 }
 
-ElementTransformer.rotate = function (element, x, y, angle) {
-  ElementTransformer.setTransformAttribute(element, 'rotate', angle + ' ' + x + ' ' + y);
+ElementTransformer.rotate = function (element, coordinates, angle) {
+  ElementTransformer.setTransformAttribute(element, 'rotate', angle + ' ' + coordinates.x + ' ' + coordinates.y);
 }
 
 export default ElementTransformer;

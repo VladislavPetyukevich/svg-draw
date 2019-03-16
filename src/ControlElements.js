@@ -1,6 +1,7 @@
 import Factory from './Factory';
 import DOMFactory from './DOMFactory';
 import ElementTransformer from './ElementTransformer';
+import Coordinates from './DataStructures/Coordinates';
 import { isVarExists, getElementNoRotateAttributes } from './util';
 
 var ControlElements = function (svgContainer, styles) {
@@ -39,9 +40,9 @@ ControlElements.prototype.update = function (targetEl) {
     ElementTransformer.setTransformAttribute(this.container, 'rotate', rotate.join(' '));
   }
   var halfSize = this.styles.size / 2;
-  ElementTransformer.setTranslate(this.closeButton, elPos.x + elSize.width - halfSize, elPos.y - halfSize);
-  ElementTransformer.setTranslate(this.resizeButton, elPos.x + elSize.width - halfSize, elPos.y + elSize.height - halfSize);
-  ElementTransformer.setTranslate(this.rotateButton, elPos.x - halfSize + elSize.width / 2, elPos.y - halfSize);
+  ElementTransformer.setTranslate(this.closeButton, new Coordinates(elPos.x + elSize.width - halfSize, elPos.y - halfSize));
+  ElementTransformer.setTranslate(this.resizeButton, new Coordinates(elPos.x + elSize.width - halfSize, elPos.y + elSize.height - halfSize));
+  ElementTransformer.setTranslate(this.rotateButton, new Coordinates(elPos.x - halfSize + elSize.width / 2, elPos.y - halfSize));
 
   var point1 = {
     x: elPos.x,
