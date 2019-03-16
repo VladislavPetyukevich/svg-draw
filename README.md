@@ -23,7 +23,7 @@ var props = {
 	},
 	cellSize: 20 //Not necessary
 };
-var editor = new SvgEditor(props);
+var editor = new SvgEditor.default(props); // .default for browser import through script tag 
 //Adding rect
 var rect = editor.factory.rect(
 	{ x: 40, y: 40, width: 80, height: 80, fill: '#0000FF' }
