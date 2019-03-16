@@ -31,23 +31,9 @@
 		<button id="toFront">To front</button>
 		<button id="toBack">To back</button>
 	</div>
-	<script type="text/javascript" src="../src/util.js"></script>
-	<script type="text/javascript" src="../src/ElementTransformer.js"></script>
-	<script type="text/javascript" src="../src/ControlElements.js"></script>
-	<script type="text/javascript" src="../src/UserEvents.js"></script>
-	<script type="text/javascript" src="../src/DOMFactory.js"></script>
-	<script type="text/javascript" src="../src/Objects/Rect.js"></script>
-	<script type="text/javascript" src="../src/Objects/Ellipse.js"></script>
-	<script type="text/javascript" src="../src/Objects/Path.js"></script>
-	<script type="text/javascript" src="../src/Objects/SVGObject.js"></script>
-	<script type="text/javascript" src="../src/Factory.js"></script>
-	<script type="text/javascript" src="../src/SvgEditor.js"></script>
-	<!--Build usage
-		<script type="text/javascript" src="../build/svgEditor.min.js"></script>
-	-->
+	<script type="text/javascript" src="SvgEditor.js"></script>
 
-	<script type="text/javascript">
-	
+  <script type="text/javascript">
 		var svgEl = document.getElementById('editSvg');
 		var props = {
 			svg: svgEl,
@@ -59,7 +45,7 @@
 			},
 			cellSize: 20
 		};
-		var editor = new SvgEditor(props);
+		var editor = new SvgEditor.default(props);
 
 
 		addRectButton.addEventListener('click', function () {

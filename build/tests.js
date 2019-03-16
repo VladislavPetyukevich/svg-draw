@@ -4,7 +4,7 @@ svgEl.setAttribute('height', 400);
 var props = {
 	svg: svgEl,
 };
-var editor = new SvgEditor(props);
+var editor = new SvgEditor.default(props);
 
 QUnit.test("Rect transformations", function (assert) {
 	var rect = editor.factory.rect({ x: 20, y: 40, width: 80, height: 20, fill: '#0000FF' });

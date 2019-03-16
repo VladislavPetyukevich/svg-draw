@@ -1,19 +1,16 @@
 {
   "name": "svg-editor",
-  "version": "0.1.0",
+  "version": "0.2.0",
+  "main": "./build/SvgEditor.js",
   "private": true,
   "devDependencies": {
-    "grunt": "~1.0.0",
-    "grunt-contrib-concat": "^1.0.1",
-    "grunt-contrib-connect": "^1.0.2",
-    "grunt-contrib-uglify": "^2.0.0",
-    "grunt-contrib-watch": "^1.0.0",
-    "grunt-umd": "^3.0.0"
+    "webpack": "^4.29.6",
+    "webpack-cli": "^3.2.3",
+    "webpack-dev-server": "^3.2.1"
   },
   "scripts": {
-    "prestart": "npm install",
-    "start": "grunt server",
-    "test": "grunt server --test",
-    "build": "grunt build"
+    "start": "webpack-dev-server --env development --open",
+    "test-front": "webpack-dev-server --env test --open",
+    "build": "webpack --env production"
   }
 }
