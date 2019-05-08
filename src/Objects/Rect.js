@@ -2,12 +2,12 @@ import ElementTransformer from '../ElementTransformer';
 import Coordinates from '../DataStructures/Coordinates';
 
 const Rect = {
-  translate: function (coordinates) {
-    this.setAttribute('x', Number(this.getAttribute('x')) + coordinates.x);
-    this.setAttribute('y', Number(this.getAttribute('y')) + coordinates.y);
+  translate: function (x, y) {
+    this.setAttribute('x', Number(this.getAttribute('x')) + x);
+    this.setAttribute('y', Number(this.getAttribute('y')) + y);
     const rotate = ElementTransformer.getTransformAttribute(this, 'rotate');
     if (rotate != undefined) {
-      ElementTransformer.setTransformAttribute(this, 'rotate', rotate[0] + ' ' + (rotate[1] + coordinates.x) + ' ' + (rotate[2] + coordinates.y));
+      ElementTransformer.setTransformAttribute(this, 'rotate', rotate[0] + ' ' + (rotate[1] + x) + ' ' + (rotate[2] + y));
     }
     return this;
   },
