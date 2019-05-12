@@ -46,6 +46,11 @@ QUnit.test("Triangle path transformations", function (assert) {
   svgObjectTests(path, assert);
 });
 
+QUnit.test("Text transformations", function (assert) {
+  const text = editor.factory.path({ x: 20, y: 40, width: 80, height: 20, d: 'M0,40 L20,0 L40,40 Z', fill: '#0000FF' });
+  svgObjectTests(text, assert);
+});
+
 QUnit.test("Event hander", function (assert) {
   var done = assert.async();
   var onChangeHandler = function () {

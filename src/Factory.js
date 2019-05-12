@@ -2,6 +2,10 @@ import DOMFactory from './DOMFactory';
 import Rect from './Objects/Rect';
 import Ellipse from './Objects/Ellipse';
 import Path from './Objects/Path';
+import Text, {
+  WIDTH_ATTRIB_NAME as TEXT_WIDTH_ATTRIB_NAME,
+  HEIGHT_ATTRIB_NAME as TEXT_HEIGHT_ATTRIB_NAME
+} from './Objects/Text';
 import SVGObject from './Objects/SVGObject';
 
 var Factory = {
@@ -37,6 +41,21 @@ var Factory = {
     DOM_Object.setPosition(x, y);
     DOM_Object.setSize(width, height);
     return DOM_Object;
+  },
+
+  text: function (object) {
+    object.type = 'text';
+    object[TEXT_WIDTH_ATTRIB_NAME] = object.width;
+    delete object.width;
+    object.lengthAdjust = 'spacingAndGlyphs';
+    object['font-family'] = 'monospace';
+    object[TEXT_HEIGHT_ATTRIB_NAME] = object.height;
+    delete object.height;
+    object['dominant-baseline'] = 'text-before-edge';
+
+    const DOM_Object = DOMFactory.createObject(object);
+    const TextObject = Object.assign(DOM_Object, Text);
+    return TextObject;
   },
 
   createFromDOM: function (DOM_Rect) {

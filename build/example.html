@@ -21,7 +21,8 @@
 	<div>
 		<button id="addRectButton">Add rect</button>
 		<button id="addEllipseButton">Add ellipse</button>
-		<button id="addPathButton">Add triangle path</button>
+    <button id="addPathButton">Add triangle path</button>
+    <button id="addTextButton">Add text</button>
 		<span><input id="gridCheckBox" type="checkbox" checked>Grid</span>
 		<a id="downloadImageLink" href="" download="image.svg">Download svg image</a>
 		<hr>
@@ -70,6 +71,13 @@
 				{ type: 'path', x: 0, y: 0, width: 80, height: 80, d: 'M0,40 L20,0 L40,40 Z', fill: '#FF0000' }
 			);
 			editor.add(path);
+    });
+    
+    addTextButton.addEventListener('click', function () {
+      var text = editor.factory.text(
+        { x: 0, y: 0, width: 80, height: 80, innerHTML: 'Text'}
+      );
+      editor.add(text);
 		});
 
 		var getImg = function () {
