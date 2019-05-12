@@ -16,7 +16,7 @@ DOMFactory.createObject = function (props) {
   for (var key in props) {
     if (props[key] == undefined) continue;
     if (key == 'innerHTML') {
-      newEl.innerHTML = props[key];
+      newEl.appendChild(document.createTextNode(props[key]));
       continue;
     }
     newEl.setAttribute(key, props[key]);
