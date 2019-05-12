@@ -138,7 +138,7 @@ Path.setSize = function (width, height) {
   return this;
 }
 
-Path.rotate = function (angle) {
+Path.rotateTransform = function (angle) {
   var elPos = this.getPosition();
   var elSize = this.getSize();
   var centerCoordinates = new Coordinates(

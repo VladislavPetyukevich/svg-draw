@@ -156,7 +156,7 @@ var UserEvents = function (cellSize, controlElements) {
       var widthDelta = (oldoldSize.width - newSize.width) / 2;
       var heightDelta = (oldoldSize.height - newSize.height) / 2;
       var rotate = ElementTransformer.getTransformAttribute(this.lastSelectedElement, 'rotate');
-      this.lastSelectedElement.rotate(rotate[0]);
+      this.lastSelectedElement.rotateTransform(rotate[0]);
       switch (rotate[0]) {
         case -270:
           if (widthDelta == 0) {
@@ -223,7 +223,7 @@ var UserEvents = function (cellSize, controlElements) {
     var x = evtCoordinates.clientX - centerX;
     var y = evtCoordinates.clientY - centerY;
     var angle = -(180 + 90 - 180 / Math.PI * Math.atan2(y, x));
-    this.lastSelectedElement.rotate(angle);
+    this.lastSelectedElement.rotateTransform(angle);
 
     this.controlElements.update(this.lastSelectedElement);
   }).bind(this);

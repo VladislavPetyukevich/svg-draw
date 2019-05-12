@@ -44,7 +44,7 @@ const Rect = {
     return this;
   },
 
-  rotate: function (angle) {
+  rotateTransform: function (angle) {
     const elPos = this.getPosition();
     const elSize = this.getSize();
     const centerCoordinates = new Coordinates(

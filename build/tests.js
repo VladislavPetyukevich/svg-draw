@@ -18,11 +18,11 @@ QUnit.test("Rect transformations", function (assert) {
 	rect.setSize(100, 40);
 	assert.deepEqual(rect.getSize(), { width: 100, height: 40 }, 'Correctly changes size');
 
-	rect.rotate(-270);
+	rect.rotateTransform(-270);
 	assert.deepEqual(rect.getPosition(), { x: 40, y: 80 }, 'Correct position after rotate by -270 degrees');
-	rect.rotate(-180);
+	rect.rotateTransform(-180);
 	assert.deepEqual(rect.getPosition(), { x: 40, y: 80 }, 'Correct position after rotate by -180 degrees');
-	rect.rotate(-90);
+	rect.rotateTransform(-90);
 	assert.deepEqual(rect.getPosition(), { x: 40, y: 80 }, 'Correct position after rotate by -90 degrees');
 });
 
@@ -38,11 +38,11 @@ QUnit.test("Ellipse transformations", function (assert) {
 	ellipse.setSize(100, 40);
 	assert.deepEqual(ellipse.getSize(), { width: 100, height: 40 }, 'Correctly changes size');
 
-	ellipse.rotate(-270);
+	ellipse.rotateTransform(-270);
 	assert.deepEqual(ellipse.getPosition(), { x: 40, y: 80 }, 'Correct position after rotate by -270 degrees');
-	ellipse.rotate(-180);
+	ellipse.rotateTransform(-180);
 	assert.deepEqual(ellipse.getPosition(), { x: 40, y: 80 }, 'Correct position after rotate by -180 degrees');
-	ellipse.rotate(-90);
+	ellipse.rotateTransform(-90);
 	assert.deepEqual(ellipse.getPosition(), { x: 40, y: 80 }, 'Correct position after rotate by -90 degrees');
 });
 
@@ -58,11 +58,11 @@ QUnit.test("Triangle path transformations", function (assert) {
 	path.setSize(100, 40);
 	assert.deepEqual(path.getSize(), { width: 100, height: 40 }, 'Correctly changes size');
 
-	path.rotate(-270);
+	path.rotateTransform(-270);
 	assert.deepEqual(path.getPosition(), { x: 40, y: 80 }, 'Correct position after rotate by -270 degrees');
-	path.rotate(-180);
+	path.rotateTransform(-180);
 	assert.deepEqual(path.getPosition(), { x: 40, y: 80 }, 'Correct position after rotate by -180 degrees');
-	path.rotate(-90);
+	path.rotateTransform(-90);
 	assert.deepEqual(path.getPosition(), { x: 40, y: 80 }, 'Correct position after rotate by -90 degrees');
 });
 

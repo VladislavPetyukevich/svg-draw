@@ -59,7 +59,7 @@ Ellipse.scale = function (width, height) {
   return this;
 }
 
-Ellipse.rotate = function (angle) {
+Ellipse.rotateTransform = function (angle) {
   var elPos = this.getPosition();
   var elSize = this.getSize();
   var centerCoordinates = new Coordinates(
