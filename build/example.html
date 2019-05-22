@@ -30,7 +30,8 @@
 	<div id="propPanel">
 		<input id="colorSelector" type="color">
 		<button id="toFront">To front</button>
-		<button id="toBack">To back</button>
+    <button id="toBack">To back</button>
+    <input id="innerText" type="text"/>
 	</div>
 	<script type="text/javascript" src="SvgEditor.js"></script>
 
@@ -111,7 +112,18 @@
 				selectedElement.parentNode.insertBefore(selectedElement, firstChild);
 			}
 			getImg();
-		});
+    });
+    
+    var innerText = document.getElementById('innerText');
+    innerText.addEventListener('input', function () {
+      const selectedElement = editor.getSelectedElement();
+      if (selectedElement == undefined) return;
+      if (selectedElement.nodeName !== 'text') return;
+      selectedElement.innerHTML = '';
+      const textNode = document.createTextNode(innerText.value);
+      selectedElement.appendChild(textNode);
+      getImg();
+    });
 
 		var changeListener = function () {
 			console.log('change event');
