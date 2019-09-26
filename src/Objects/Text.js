@@ -1,5 +1,4 @@
 import { getElementNoRotateAttributes } from '../util';
-import Coordinates from '../DataStructures/Coordinates';
 import ElementTransformer from '../ElementTransformer';
 
 export const X_ATTRIB_NAME = 'x';
@@ -52,10 +51,10 @@ var Text = {
 
   rotateTransform: function (angle) {
     const bRect = getElementNoRotateAttributes(this);
-    const centerCoordinates = new Coordinates(
-      bRect.x + bRect.width / 2,
-      bRect.y + bRect.height / 2
-    );
+    const centerCoordinates = {
+      x: bRect.x + bRect.width / 2,
+      y: bRect.y + bRect.height / 2
+    };
     ElementTransformer.rotate(this, centerCoordinates, angle);
     return this;
   }

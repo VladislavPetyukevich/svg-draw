@@ -1,5 +1,4 @@
 import ElementTransformer from '../ElementTransformer';
-import Coordinates from '../DataStructures/Coordinates';
 
 const Rect = {
   translate: function (x, y) {
@@ -47,10 +46,10 @@ const Rect = {
   rotateTransform: function (angle) {
     const elPos = this.getPosition();
     const elSize = this.getSize();
-    const centerCoordinates = new Coordinates(
-      elPos.x + elSize.width / 2,
-      elPos.y + elSize.height / 2
-    );
+    const centerCoordinates = {
+      x: elPos.x + elSize.width / 2,
+      y: elPos.y + elSize.height / 2
+    };
     ElementTransformer.rotate(this, centerCoordinates, angle);
     return this;
   }
