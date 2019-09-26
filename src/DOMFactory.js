@@ -9,10 +9,8 @@ DOMFactory.createGroup = function () {
   return newEl;
 }
 
-DOMFactory.createObject = function (props) {
-  if (typeof props.type == 'undefined') return;
-  var newEl = document.createElementNS("http://www.w3.org/2000/svg", props.type);
-  delete props.type;
+DOMFactory.createObject = function (type, props) {
+  var newEl = document.createElementNS("http://www.w3.org/2000/svg", type);
   for (var key in props) {
     if (props[key] == undefined) continue;
     if (key == 'innerHTML') {

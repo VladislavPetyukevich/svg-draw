@@ -9,33 +9,29 @@ import Text, {
 
 var Factory = {
   rect: function (object) {
-    object.type = 'rect';
-
-    var DOM_Object = DOMFactory.createObject(object);
+    var DOM_Object = DOMFactory.createObject('rect', object);
     return Object.assign(DOM_Object, Rect);
   },
 
   ellipse: function (object) {
-    object.type = 'ellipse';
     object.cx = object.x + object.width / 2;
     object.cy = object.y + object.height / 2;
     object.rx = object.width / 2;
     object.ry = object.height / 2;
     object.x = object.y = object.width = object.height = undefined;
 
-    var DOM_Object = DOMFactory.createObject(object);
+    var DOM_Object = DOMFactory.createObject('ellipse', object);
     return Object.assign(DOM_Object, Ellipse);
   },
 
   path: function (object) {
-    object.type = 'path';
     var x = object.x;
     var y = object.y;
     var width = object.width;
     var height = object.height;
     object.x = object.y = object.width = object.height = undefined;
 
-    var DOM_Object = DOMFactory.createObject(object);
+    var DOM_Object = DOMFactory.createObject('path', object);
     Object.assign(DOM_Object, Path);
     DOM_Object.setPosition(x, y);
     DOM_Object.setSize(width, height);
@@ -43,7 +39,6 @@ var Factory = {
   },
 
   text: function (object) {
-    object.type = 'text';
     object[TEXT_WIDTH_ATTRIB_NAME] = object.width;
     delete object.width;
     object.lengthAdjust = 'spacingAndGlyphs';
@@ -52,7 +47,7 @@ var Factory = {
     delete object.height;
     object['dominant-baseline'] = 'text-before-edge';
 
-    const DOM_Object = DOMFactory.createObject(object);
+    const DOM_Object = DOMFactory.createObject('text', object);
     const TextObject = Object.assign(DOM_Object, Text);
     return TextObject;
   },
