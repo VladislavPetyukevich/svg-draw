@@ -6,7 +6,6 @@ import Text, {
   WIDTH_ATTRIB_NAME as TEXT_WIDTH_ATTRIB_NAME,
   HEIGHT_ATTRIB_NAME as TEXT_HEIGHT_ATTRIB_NAME
 } from './Objects/Text';
-import SVGObject from './Objects/SVGObject';
 
 var Factory = {
   rect: function (object) {
@@ -56,11 +55,6 @@ var Factory = {
     const DOM_Object = DOMFactory.createObject(object);
     const TextObject = Object.assign(DOM_Object, Text);
     return TextObject;
-  },
-
-  createFromDOM: function (DOM_Rect) {
-    var attributes = DOM_Rect.attributes;
-    return Object.assign(DOM_Rect, SVGObject[DOM_Rect.nodeName]);
   },
 };
 

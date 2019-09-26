@@ -1,13 +1,5 @@
 import ElementTransformer from './ElementTransformer';
 
-export function roundTo(number, round) {
-  return Math.round(number / round) * round;
-}
-
-export function nodeListToArray(nodesList) {
-  return Array.prototype.slice.call(nodesList);
-}
-
 export function rotateVector(vector, angle) {
   var theta = angle * 0.017453292519943295; // (angle / 180) * Math.PI;
   var cos = Math.cos(theta);
@@ -40,34 +32,4 @@ export function getElementNoRotateAttributes(el) {
   var attributes = getElementAttributes(elCopy);
   el.parentNode.removeChild(elCopy);
   return attributes;
-}
-
-export function getEventCoordinates(event) {
-  if (isVarExists(event.touches)) {
-    return event.touches[0];
-  }
-  return event;
-}
-
-export function prepareSvgCodeToSave(svgEl, width, height) {
-  var newSvgEl = document.createElementNS("http://www.w3.org/2000/svg", 'svg');
-  newSvgEl.setAttribute('viewBox', '0 0 ' + width + ' ' + height);
-  newSvgEl.innerHTML = '<!-- Created with SVG-edit - http://someurl.com -->';
-  newSvgEl.innerHTML += svgEl.innerHTML;
-
-  var serializer = new XMLSerializer();
-  var source = serializer.serializeToString(newSvgEl);
-
-  if (!source.match(/^<svg[^>]+xmlns="http\:\/\/www\.w3\.org\/2000\/svg"/)) {
-    source = source.replace(/^<svg/, '<svg xmlns="http://www.w3.org/2000/svg"');
-  }
-  if (!source.match(/^<svg[^>]+"http\:\/\/www\.w3\.org\/1999\/xlink"/)) {
-    source = source.replace(/^<svg/, '<svg xmlns:xlink="http://www.w3.org/1999/xlink"');
-  }
-
-  return source;
-}
-
-export function isVarExists(variable) {
-  return typeof variable !== 'undefined';
 }

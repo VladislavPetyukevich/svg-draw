@@ -1,14 +1,4 @@
-var svgEl = document.createElement('svg');
-svgEl.setAttribute('width', 400);
-svgEl.setAttribute('height', 400);
-var props = {
-  svg: svgEl,
-};
-var editor = new SvgEditor.default(props);
-
 function svgObjectTests(object, assert) {
-  editor.add(object);
-
   assert.deepEqual(object.getPosition(), { x: 20, y: 40 }, 'Correctly position at initialization');
   assert.deepEqual(object.getSize(), { width: 80, height: 20 }, 'Correctly size at initialization');
 
@@ -32,33 +22,21 @@ function svgObjectTests(object, assert) {
 }
 
 QUnit.test("Rect transformations", function (assert) {
-  const rect = editor.factory.rect({ x: 20, y: 40, width: 80, height: 20, fill: '#0000FF' });
+  const rect = SvgEditor.default.rect({ x: 20, y: 40, width: 80, height: 20, fill: '#0000FF' });
   svgObjectTests(rect, assert);
 });
 
 QUnit.test("Ellipse transformations", function (assert) {
-  const ellipse = editor.factory.ellipse({ x: 20, y: 40, width: 80, height: 20, fill: '#0000FF' });
+  const ellipse = SvgEditor.default.ellipse({ x: 20, y: 40, width: 80, height: 20, fill: '#0000FF' });
   svgObjectTests(ellipse, assert);
 });
 
 QUnit.test("Triangle path transformations", function (assert) {
-  const path = editor.factory.path({ x: 20, y: 40, width: 80, height: 20, d: 'M0,40 L20,0 L40,40 Z', fill: '#0000FF' });
+  const path = SvgEditor.default.path({ x: 20, y: 40, width: 80, height: 20, d: 'M0,40 L20,0 L40,40 Z', fill: '#0000FF' });
   svgObjectTests(path, assert);
 });
 
 QUnit.test("Text transformations", function (assert) {
-  const text = editor.factory.path({ x: 20, y: 40, width: 80, height: 20, d: 'M0,40 L20,0 L40,40 Z', fill: '#0000FF' });
+  const text = SvgEditor.default.path({ x: 20, y: 40, width: 80, height: 20, d: 'M0,40 L20,0 L40,40 Z', fill: '#0000FF' });
   svgObjectTests(text, assert);
-});
-
-QUnit.test("Event hander", function (assert) {
-  var done = assert.async();
-  var onChangeHandler = function () {
-    assert.equal(true, true);
-    done();
-  };
-  editor.onChange = onChangeHandler;
-
-  var rect = editor.factory.rect({ x: 20, y: 40, width: 80, height: 20, fill: '#0000FF' });
-  editor.add(rect);
 });

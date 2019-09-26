@@ -1,17 +1,3 @@
-.draggableSvg:hover{
-	cursor: move;
-	opacity: 0.5;
-}
-
-.block{
-	display: inline-block;
-}
-
 svg{
 	border: 1px solid black;
-}
-
-#grid{
-	opacity: 0.3;
-	transition: 0.5s;
 }
