@@ -12,6 +12,21 @@ const commonConfig = {
     libraryTarget: 'umd',
     path: PATHS.build,
     filename: 'SvgEditor.js'
+  },
+  resolve: {
+    extensions: ['.js', '.ts']
+  },
+  module: {
+    rules: [
+      { enforce: "pre", test: /\.js$/, loader: "source-map-loader" },
+      {
+        test: /\.(js|ts)$/,
+        exclude: /node_modules/,
+        use: {
+          loader: 'awesome-typescript-loader'
+        },
+      }
+    ]
   }
 };
 
