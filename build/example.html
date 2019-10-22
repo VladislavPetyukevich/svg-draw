@@ -12,13 +12,18 @@
 
 	<script type="text/javascript" src="SvgEditor.js"></script>
 	<script type="text/javascript">
-		var svgEl = document.getElementById('editSvg');
-		var rect = SvgEditor.default.rect(
-			{ x: 0, y: 0, width: 80, height: 80, fill: '#0000FF' }
+		const { createSvgEditor, initialState, addRect } = SvgEditor;
+		const svgEditor = createSvgEditor(
+			initialState()
 		);
-		svgEl.appendChild(rect);
-		rect.setSize(50, 50);
-		console.log('rect: ', rect);
+
+		const newRect = svgEditor(addRect)({
+			x: 10,
+			y: 10,
+			width: 10,
+			height: 10
+		});
+		console.log('newRect: ', newRect);
 	</script>
 </body>
 

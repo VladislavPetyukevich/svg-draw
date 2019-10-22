@@ -6,7 +6,7 @@ const PATHS = {
 };
 
 const commonConfig = {
-  entry: path.resolve(PATHS.source, 'index.js'),
+  entry: path.resolve(PATHS.source, 'index.ts'),
   output: {
     library: 'SvgEditor',
     libraryTarget: 'umd',
