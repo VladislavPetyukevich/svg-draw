@@ -8,13 +8,16 @@
 </head>
 
 <body>
-	<svg id="editSvg" width="400" height="400"></svg>
+	<svg id="svgContainer" width="400" height="400"></svg>
 
 	<script type="text/javascript" src="/SvgEditor.umd.js"></script>
 	<script type="text/javascript">
-		const { createSvgEditor, initialState, addRect } = SvgEditor;
+    const svgContainer = document.getElementById('svgContainer');
+		const { createSvgEditor, initialState, stateToSvg, addRect } = SvgEditor;
 		const svgEditor = createSvgEditor(
-			initialState()
+			initialState(
+        stateToSvg(svgContainer)
+      )
 		);
 
 		const newRect = svgEditor(addRect)({
