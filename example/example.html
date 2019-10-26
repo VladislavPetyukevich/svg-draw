@@ -12,12 +12,19 @@
 
 	<script type="text/javascript" src="/SvgEditor.umd.js"></script>
 	<script type="text/javascript">
-    const svgContainer = document.getElementById('svgContainer');
-		const { createSvgEditor, initialState, stateToSvg, stateToSvgMapper, addElement } = SvgEditor;
+		const svgContainer = document.getElementById('svgContainer');
+		const {
+			createSvgEditor,
+			initialState,
+			stateToSvg,
+			stateToSvgMapper,
+			addElement,
+			setElementParameters
+		} = SvgEditor;
 		const svgEditor = createSvgEditor(
 			initialState(
-        stateToSvg(svgContainer, stateToSvgMapper)
-      )
+				stateToSvg(svgContainer, stateToSvgMapper)
+			)
 		);
 
 		const newRect = svgEditor(addElement)({
@@ -28,6 +35,19 @@
 			height: 10
 		});
 		console.log('newRect: ', newRect);
+
+		for (let i = 1; i <= 10; i++) {
+			setTimeout(
+				() => {
+					svgEditor(setElementParameters)({
+						id: newRect.id,
+						y: i * 10,
+						width: i * 10
+					});
+				},
+				i * 100
+			);
+		}
 	</script>
 </body>
 

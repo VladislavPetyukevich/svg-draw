@@ -25,3 +25,25 @@ export const addElement = (stateChanger: StateChanger, parameters: Partial<Eleme
       return newElement;
     }
   );
+
+export const setElementParameters = (stateChanger: StateChanger, parameters: Partial<Element>) =>
+  stateChanger(
+    (state: State, setState: SetState) => {
+      if ((parameters.id !== 0) && !parameters.id) {
+        throw new Error('Element id is not specified');
+      }
+      const targetElement = state.elements.find(element => element.id === parameters.id);
+      if (!targetElement) {
+        throw new Error('Element not found');
+      }
+      const changedElement = {
+        ...targetElement,
+        ...parameters,
+      };
+      const newStateElements = state.elements.map(element => (element.id === changedElement.id) ? changedElement : element);
+      setState({
+        elements: newStateElements
+      });
+      return changedElement;
+    }
+  );
