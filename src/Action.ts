@@ -1,9 +1,9 @@
 import { StateChanger, State, SetState } from './State';
 import { Element } from './Element';
 
-export type ActionCreator = (stateChanger: StateChanger, parameters: Partial<Element>) => Partial<Element>;
+export type ActionCreator = (stateChanger: StateChanger, parameters: Partial<Element>) => Element;
 
-export type Action = (state: State, setState: SetState) => Partial<Element>;
+export type Action = (state: State, setState: SetState) => Element;
 
 export const addElement = (stateChanger: StateChanger, parameters: Partial<Element>) =>
   stateChanger(
