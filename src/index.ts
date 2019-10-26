@@ -1,11 +1,12 @@
 import { createSvgEditor } from './SvgEditor';
 import { initialState } from './State';
 import { addRect } from './Action';
-import { stateToSvg } from './StateToSvg';
+import { stateToSvg, stateToSvgMapper } from './StateToSvg';
 
 export {
   createSvgEditor,
   initialState,
   stateToSvg,
+  stateToSvgMapper,
   addRect
 };

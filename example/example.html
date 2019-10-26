@@ -13,10 +13,10 @@
 	<script type="text/javascript" src="/SvgEditor.umd.js"></script>
 	<script type="text/javascript">
     const svgContainer = document.getElementById('svgContainer');
-		const { createSvgEditor, initialState, stateToSvg, addRect } = SvgEditor;
+		const { createSvgEditor, initialState, stateToSvg, stateToSvgMapper, addRect } = SvgEditor;
 		const svgEditor = createSvgEditor(
 			initialState(
-        stateToSvg(svgContainer)
+        stateToSvg(svgContainer, stateToSvgMapper)
       )
 		);
 
