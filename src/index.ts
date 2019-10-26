@@ -1,6 +1,6 @@
 import { createSvgEditor } from './SvgEditor';
 import { initialState } from './State';
-import { addRect } from './Action';
+import { addElement } from './Action';
 import { stateToSvg, stateToSvgMapper } from './StateToSvg';
 
 export {
@@ -8,5 +8,5 @@ export {
   initialState,
   stateToSvg,
   stateToSvgMapper,
-  addRect
+  addElement
 };

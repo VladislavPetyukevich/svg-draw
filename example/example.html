@@ -13,14 +13,15 @@
 	<script type="text/javascript" src="/SvgEditor.umd.js"></script>
 	<script type="text/javascript">
     const svgContainer = document.getElementById('svgContainer');
-		const { createSvgEditor, initialState, stateToSvg, stateToSvgMapper, addRect } = SvgEditor;
+		const { createSvgEditor, initialState, stateToSvg, stateToSvgMapper, addElement } = SvgEditor;
 		const svgEditor = createSvgEditor(
 			initialState(
         stateToSvg(svgContainer, stateToSvgMapper)
       )
 		);
 
-		const newRect = svgEditor(addRect)({
+		const newRect = svgEditor(addElement)({
+			type: 'rect',
 			x: 10,
 			y: 10,
 			width: 10,

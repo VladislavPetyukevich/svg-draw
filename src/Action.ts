@@ -5,12 +5,12 @@ export type ActionCreator = (stateChanger: StateChanger, parameters: Partial<Ele
 
 export type Action = (state: State, setState: SetState) => Partial<Element>;
 
-export const addRect = (stateChanger: StateChanger, parameters: Partial<Element>) =>
+export const addElement = (stateChanger: StateChanger, parameters: Partial<Element>) =>
   stateChanger(
     (state: State, setState: SetState) => {
       const newElement: Element = {
         id: state.elements.length,
-        type: 'rect',
+        type: parameters.type!,
         x: parameters.x!,
         y: parameters.y!,
         width: parameters.width!,
