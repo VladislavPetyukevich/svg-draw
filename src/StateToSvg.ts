@@ -23,12 +23,19 @@ export const stateToSvg: StateToSvg = (svgContainer: SVGElement, stateToSvgMappe
 export const stateToSvgMapper: StateToSvgMapper = (element: Element) => {
   switch (element.type) {
     case 'rect':
-      const newElement = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
-      newElement.setAttribute('x', `${element.x}`);
-      newElement.setAttribute('y', `${element.y}`);
-      newElement.setAttribute('width', `${element.width}`);
-      newElement.setAttribute('height', `${element.height}`);
-      return newElement;
+      const newRect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+      newRect.setAttribute('x', `${element.x}`);
+      newRect.setAttribute('y', `${element.y}`);
+      newRect.setAttribute('width', `${element.width}`);
+      newRect.setAttribute('height', `${element.height}`);
+      return newRect;
+    case 'ellipse':
+      const newEllipse = document.createElementNS('http://www.w3.org/2000/svg', 'ellipse');
+      newEllipse.setAttribute('cx', `${element.x + element.width / 2}`);
+      newEllipse.setAttribute('cy', `${element.y + element.height / 2}`);
+      newEllipse.setAttribute('rx', `${element.width / 2}`);
+      newEllipse.setAttribute('ry', `${element.height / 2}`);
+      return newEllipse;
     default:
       throw new Error(`Unknown element type: ${element.type}`);
   }

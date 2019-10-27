@@ -36,6 +36,15 @@
 		});
 		console.log('newRect: ', newRect);
 
+		const newellipse = svgEditor(addElement)({
+			type: 'ellipse',
+			x: 100,
+			y: 10,
+			width: 50,
+			height: 50
+		});
+		console.log('newellipse: ', newellipse);
+
 		for (let i = 1; i <= 10; i++) {
 			setTimeout(
 				() => {
