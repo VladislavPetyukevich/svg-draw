@@ -29,5 +29,7 @@ export const stateToSvgMapper: StateToSvgMapper = (element: Element) => {
       newElement.setAttribute('width', `${element.width}`);
       newElement.setAttribute('height', `${element.height}`);
       return newElement;
+    default:
+      throw new Error(`Unknown element type: ${element.type}`);
   }
 };
