@@ -17,7 +17,8 @@ export const addElement = (stateChanger: StateChanger, parameters: Partial<Eleme
         x: parameters.x || 0,
         y: parameters.y || 0,
         width: parameters.width || 0,
-        height: parameters.height || 0
+        height: parameters.height || 0,
+        ...(parameters.path && { path: parameters.path })
       };
       setState({
         elements: [...state.elements, newElement]
