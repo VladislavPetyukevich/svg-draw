@@ -1,6 +1,6 @@
 import { Action } from './Action';
 import { Element } from './Element';
-import { StateToSvgChanger } from './StateToSvg';
+import { StateToSvgChanger } from './SVG/StateToSvg';
 
 export interface State {
   elements: Element[]

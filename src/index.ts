@@ -1,13 +1,19 @@
 import { createSvgEditor } from './SvgEditor';
 import { initialState } from './State';
 import { addElement, setElementParameters } from './Action';
-import { stateToSvg, stateToSvgMapper } from './StateToSvg';
+import { stateToSvg, combineSVGElementCreators } from './SVG/StateToSvg';
+import { rectCreator } from './SVG/RectCreator';
+import { ellipseCreator } from './SVG/EllipseCreator';
+import { pathCreator } from './SVG/PathCreator';
 
 export {
   createSvgEditor,
   initialState,
   stateToSvg,
-  stateToSvgMapper,
   addElement,
-  setElementParameters
+  setElementParameters,
+  combineSVGElementCreators,
+  rectCreator,
+  ellipseCreator,
+  pathCreator
 };

@@ -17,10 +17,18 @@
 			createSvgEditor,
 			initialState,
 			stateToSvg,
-			stateToSvgMapper,
+			combineSVGElementCreators,
+			rectCreator,
+			ellipseCreator,
+			pathCreator,
 			addElement,
 			setElementParameters
 		} = SvgEditor;
+		const stateToSvgMapper = combineSVGElementCreators({
+			rect: rectCreator,
+			ellipse: ellipseCreator,
+			path: pathCreator
+		});
 		const svgEditor = createSvgEditor(
 			initialState(
 				stateToSvg(svgContainer, stateToSvgMapper)
