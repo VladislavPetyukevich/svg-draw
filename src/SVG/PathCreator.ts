@@ -4,7 +4,7 @@ export const pathCreator: SVGElementsCreator = (element) => {
   if (!element.path) {
     throw new Error('Path is not specified');
   }
-  const markerRegEx = /[MLZz]/g;
+  const markerRegEx = /[MmLlSsQqLlHhVvCcSsQqTtAaZz]/g;
   const digitRegEx = /-?[0-9]*\.?\d+/g;
   const newPath = document.createElementNS('http://www.w3.org/2000/svg', 'path');
   const markerIndices: number[] = [];
