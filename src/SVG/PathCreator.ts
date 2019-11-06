@@ -4,7 +4,7 @@ export const pathCreator: SVGElementsCreator = (element) => {
   if (!element.path) {
     throw new Error('Path is not specified');
   }
-  const markerRegEx = /[ML]/g;
+  const markerRegEx = /[MLZz]/g;
   const digitRegEx = /-?[0-9]*\.?\d+/g;
   const newPath = document.createElementNS('http://www.w3.org/2000/svg', 'path');
   const markerIndices: number[] = [];
@@ -17,8 +17,8 @@ export const pathCreator: SVGElementsCreator = (element) => {
     const valuesStartIndex = markerIndex + 1;
     const valuesEndIndex = (index === markerIndices.length - 1) ? element.path!.length : markerIndices[index + 1];
     const valuesString = element.path!.substring(valuesStartIndex, valuesEndIndex);
-    const values = valuesString.match(digitRegEx)!.map(value => +value);
-    return { marker, values };
+    const values = valuesString.match(digitRegEx) || [];
+    return { marker, values: values.map(value => +value) };
   });
 
   const getCommandValues = (pathCommands: { marker: string, values: number[] }[], isXValues: boolean) => {
