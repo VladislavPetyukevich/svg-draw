@@ -72,5 +72,6 @@ export const pathCreator: SVGElementsCreator = (element) => {
     ''
   );
   newPath.setAttribute('d', newElementPath);
+  newPath.setAttribute('fill', `${element.fill}`);
   return newPath;
 };
