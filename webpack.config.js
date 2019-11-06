@@ -15,7 +15,10 @@ const commonConfig = {
     filename: 'SvgEditor.umd.js'
   },
   resolve: {
-    extensions: ['.js', '.ts']
+    extensions: ['.js', '.ts'],
+    alias: {
+      '@': PATHS.source
+    }
   },
   module: {
     rules: [

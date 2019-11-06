@@ -1,5 +1,5 @@
-import { State } from '../State';
-import { Element, ElementType } from '../Element';
+import { State } from '@/State';
+import { Element, ElementType } from '@/Element';
 
 type StateToSvg = (svgContainer: SVGElement, stateToSvgMapper: SVGElementsCreator) => StateToSvgChanger;
 
