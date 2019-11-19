@@ -6,6 +6,16 @@ import { rectCreator } from './SVG/RectCreator';
 import { ellipseCreator } from './SVG/EllipseCreator';
 import { circleCreator } from './SVG/CircleCreator';
 import { lineCreator } from './SVG/LineCreator';
+import { commonFieldsWrapper } from './SVG/CommonFieldsWrapper';
+
+const svgElementCreators = {
+  rect: commonFieldsWrapper(rectCreator),
+  ellipse: commonFieldsWrapper(ellipseCreator),
+  circle: commonFieldsWrapper(circleCreator),
+  line: commonFieldsWrapper(lineCreator)
+};
+
+const stateToSvgMapper = combineSVGElementCreators(svgElementCreators);
 
 export {
   createSvgEditor,
@@ -17,5 +27,7 @@ export {
   rectCreator,
   ellipseCreator,
   circleCreator,
-  lineCreator
+  lineCreator,
+  svgElementCreators,
+  stateToSvgMapper
 };

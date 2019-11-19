@@ -8,6 +8,5 @@ export const circleCreator: SVGElementsCreator = (element) => {
     throw new Error('Circle width and height are not the same');
   }
   newCircle.setAttribute('r', `${element.width / 2}`);
-  newCircle.setAttribute('fill', `${element.fill}`);
   return newCircle;
 };

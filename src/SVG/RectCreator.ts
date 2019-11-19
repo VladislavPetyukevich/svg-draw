@@ -6,6 +6,5 @@ export const rectCreator: SVGElementsCreator = (element) => {
   newRect.setAttribute('y', `${element.y}`);
   newRect.setAttribute('width', `${element.width}`);
   newRect.setAttribute('height', `${element.height}`);
-  newRect.setAttribute('fill', `${element.fill}`);
   return newRect;
 };

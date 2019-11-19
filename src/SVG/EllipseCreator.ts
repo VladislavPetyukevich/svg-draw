@@ -6,6 +6,5 @@ export const ellipseCreator: SVGElementsCreator = (element) => {
   newEllipse.setAttribute('cy', `${element.y + element.height / 2}`);
   newEllipse.setAttribute('rx', `${element.width / 2}`);
   newEllipse.setAttribute('ry', `${element.height / 2}`);
-  newEllipse.setAttribute('fill', `${element.fill}`);
   return newEllipse;
 };
