@@ -12,4 +12,5 @@ export interface Element {
   width: number;
   height: number;
   fill: string;
+  stroke?: string;
 }

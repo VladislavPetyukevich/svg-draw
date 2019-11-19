@@ -19,6 +19,7 @@ export const addElement = (stateChanger: StateChanger, parameters: Partial<Eleme
         width: parameters.width || 0,
         height: parameters.height || 0,
         fill: parameters.fill || 'black',
+        stroke: parameters.stroke,
       };
       setState({
         elements: [...state.elements, newElement]
