@@ -1,4 +1,4 @@
-export type ElementType = 'rect' | 'ellipse' | 'path';
+export type ElementType = 'rect' | 'ellipse';
 
 export interface Element {
   id: number;
@@ -8,5 +8,4 @@ export interface Element {
   width: number;
   height: number;
   fill: string;
-  path?: string;
 }

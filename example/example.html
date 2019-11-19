@@ -20,14 +20,12 @@
 			combineSVGElementCreators,
 			rectCreator,
 			ellipseCreator,
-			pathCreator,
 			addElement,
 			setElementParameters
 		} = SvgEditor;
 		const stateToSvgMapper = combineSVGElementCreators({
 			rect: rectCreator,
-			ellipse: ellipseCreator,
-			path: pathCreator
+			ellipse: ellipseCreator
 		});
 		const svgEditor = createSvgEditor(
 			initialState(
@@ -54,17 +52,6 @@
 			fill: 'green'
 		});
 		console.log('newellipse: ', newellipse);
-
-		const newPath = svgEditor(addElement)({
-			type: 'path',
-			path: 'M10 10, L 20 10 L20 20 L 10 20',
-			x: 130,
-			y: 100,
-			width: 20,
-			height: 40,
-			fill: 'blue'
-		});
-		console.log('newPath: ', newPath);
 
 		for (let i = 1; i <= 10; i++) {
 			setTimeout(

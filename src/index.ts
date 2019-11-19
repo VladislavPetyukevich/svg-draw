@@ -4,7 +4,6 @@ import { addElement, setElementParameters } from './Action';
 import { stateToSvg, combineSVGElementCreators } from './SVG/StateToSvg';
 import { rectCreator } from './SVG/RectCreator';
 import { ellipseCreator } from './SVG/EllipseCreator';
-import { pathCreator } from './SVG/PathCreator';
 
 export {
   createSvgEditor,
@@ -15,5 +14,4 @@ export {
   combineSVGElementCreators,
   rectCreator,
   ellipseCreator,
-  pathCreator
 };
