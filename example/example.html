@@ -20,12 +20,14 @@
 			combineSVGElementCreators,
 			rectCreator,
 			ellipseCreator,
+			circleCreator,
 			addElement,
 			setElementParameters
 		} = SvgEditor;
 		const stateToSvgMapper = combineSVGElementCreators({
 			rect: rectCreator,
-			ellipse: ellipseCreator
+			ellipse: ellipseCreator,
+			circle: circleCreator
 		});
 		const svgEditor = createSvgEditor(
 			initialState(
@@ -47,11 +49,20 @@
 			type: 'ellipse',
 			x: 100,
 			y: 10,
-			width: 50,
+			width: 80,
 			height: 50,
 			fill: 'green'
 		});
 		console.log('newellipse: ', newellipse);
+
+		const newCircle = svgEditor(addElement)({
+			type: 'circle',
+			x: 120,
+			y: 80,
+			width: 50,
+			height: 50,
+			fill: 'blue'
+		});
 
 		for (let i = 1; i <= 10; i++) {
 			setTimeout(

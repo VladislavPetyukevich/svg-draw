@@ -1,4 +1,4 @@
-export type ElementType = 'rect' | 'ellipse';
+export type ElementType = 'rect' | 'ellipse' | 'circle';
 
 export interface Element {
   id: number;
