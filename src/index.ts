@@ -5,6 +5,7 @@ import { stateToSvg, combineSVGElementCreators } from './SVG/StateToSvg';
 import { rectCreator } from './SVG/RectCreator';
 import { ellipseCreator } from './SVG/EllipseCreator';
 import { circleCreator } from './SVG/CircleCreator';
+import { lineCreator } from './SVG/LineCreator';
 
 export {
   createSvgEditor,
@@ -15,5 +16,6 @@ export {
   combineSVGElementCreators,
   rectCreator,
   ellipseCreator,
-  circleCreator
+  circleCreator,
+  lineCreator
 };
