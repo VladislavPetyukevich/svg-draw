@@ -3,7 +3,8 @@ export type ElementType =
   'ellipse' |
   'circle' |
   'line' |
-  'polygon';
+  'polygon' |
+  'polyline';
 
 export interface Element {
   id: number;

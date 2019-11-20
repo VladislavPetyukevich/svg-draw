@@ -7,6 +7,7 @@ import { ellipseCreator } from './SVG/EllipseCreator';
 import { circleCreator } from './SVG/CircleCreator';
 import { lineCreator } from './SVG/LineCreator';
 import { polygonCreator } from './SVG/PolygonCreator';
+import { polylineCreator } from './SVG/PolylineCreator';
 import { commonFieldsWrapper } from './SVG/CommonFieldsWrapper';
 import { pointsPropertyWrapper } from './SVG/PointsPropertyWrapper';
 
@@ -15,7 +16,8 @@ const svgElementCreators = {
   ellipse: commonFieldsWrapper(ellipseCreator),
   circle: commonFieldsWrapper(circleCreator),
   line: commonFieldsWrapper(lineCreator),
-  polygon: commonFieldsWrapper(pointsPropertyWrapper(polygonCreator))
+  polygon: commonFieldsWrapper(pointsPropertyWrapper(polygonCreator)),
+  polyline: commonFieldsWrapper(pointsPropertyWrapper(polylineCreator))
 };
 
 const stateToSvgMapper = combineSVGElementCreators(svgElementCreators);
