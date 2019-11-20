@@ -65,6 +65,16 @@
 			stroke: 'orange'
 		});
 
+		const newPolygon = svgEditor(addElement)({
+			type: 'polygon',
+			points: '100,100 150,25 150,75,200,0',
+			x: 20,
+			y: 120,
+			width: 80,
+			height: 80,
+			fill: 'rosybrown'
+		});
+
 		for (let i = 1; i <= 10; i++) {
 			setTimeout(
 				() => {

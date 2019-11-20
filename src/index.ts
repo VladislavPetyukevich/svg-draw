@@ -6,13 +6,15 @@ import { rectCreator } from './SVG/RectCreator';
 import { ellipseCreator } from './SVG/EllipseCreator';
 import { circleCreator } from './SVG/CircleCreator';
 import { lineCreator } from './SVG/LineCreator';
+import { polygonCreator } from './SVG/PolygonCreator';
 import { commonFieldsWrapper } from './SVG/CommonFieldsWrapper';
 
 const svgElementCreators = {
   rect: commonFieldsWrapper(rectCreator),
   ellipse: commonFieldsWrapper(ellipseCreator),
   circle: commonFieldsWrapper(circleCreator),
-  line: commonFieldsWrapper(lineCreator)
+  line: commonFieldsWrapper(lineCreator),
+  polygon: commonFieldsWrapper(polygonCreator)
 };
 
 const stateToSvgMapper = combineSVGElementCreators(svgElementCreators);

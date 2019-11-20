@@ -2,7 +2,8 @@ export type ElementType =
   'rect' |
   'ellipse' |
   'circle' |
-  'line';
+  'line' |
+  'polygon';
 
 export interface Element {
   id: number;
@@ -11,6 +12,7 @@ export interface Element {
   y: number;
   width: number;
   height: number;
+  points?: string;
   fill?: string;
   stroke?: string;
 }

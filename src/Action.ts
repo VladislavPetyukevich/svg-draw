@@ -20,6 +20,7 @@ export const addElement = (stateChanger: StateChanger, parameters: Partial<Eleme
         height: parameters.height || 0,
         fill: parameters.fill,
         stroke: parameters.stroke,
+        points: parameters.points,
       };
       setState({
         elements: [...state.elements, newElement]
