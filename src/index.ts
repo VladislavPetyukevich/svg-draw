@@ -8,16 +8,16 @@ import { circleCreator } from './SVG/CircleCreator';
 import { lineCreator } from './SVG/LineCreator';
 import { polygonCreator } from './SVG/PolygonCreator';
 import { polylineCreator } from './SVG/PolylineCreator';
-import { commonFieldsWrapper } from './SVG/CommonFieldsWrapper';
+import { colorPropertiesWrapper } from './SVG/ColorPropertiesWrapper';
 import { pointsPropertyWrapper } from './SVG/PointsPropertyWrapper';
 
 const svgElementCreators = {
-  rect: commonFieldsWrapper(rectCreator),
-  ellipse: commonFieldsWrapper(ellipseCreator),
-  circle: commonFieldsWrapper(circleCreator),
-  line: commonFieldsWrapper(lineCreator),
-  polygon: commonFieldsWrapper(pointsPropertyWrapper(polygonCreator)),
-  polyline: commonFieldsWrapper(pointsPropertyWrapper(polylineCreator))
+  rect: colorPropertiesWrapper(rectCreator),
+  ellipse: colorPropertiesWrapper(ellipseCreator),
+  circle: colorPropertiesWrapper(circleCreator),
+  line: colorPropertiesWrapper(lineCreator),
+  polygon: colorPropertiesWrapper(pointsPropertyWrapper(polygonCreator)),
+  polyline: colorPropertiesWrapper(pointsPropertyWrapper(polylineCreator))
 };
 
 const stateToSvgMapper = combineSVGElementCreators(svgElementCreators);

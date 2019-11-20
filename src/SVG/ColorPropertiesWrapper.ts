@@ -1,7 +1,7 @@
 import { SVGElementsCreator } from './StateToSvg';
 import { Element } from '@/Element';
 
-export const commonFieldsWrapper = (elementCreator: SVGElementsCreator) =>
+export const colorPropertiesWrapper = (elementCreator: SVGElementsCreator) =>
   (element: Element) => {
     const newElement = elementCreator(element);
     if (element.fill) {
