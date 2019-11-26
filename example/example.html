@@ -19,6 +19,7 @@
 			stateToSvg,
 			addElement,
 			setElementParameters,
+			addElementParameters,
 			stateToSvgMapper
 		} = SvgEditor;
 		const svgEditor = createSvgEditor(
@@ -41,7 +42,7 @@
 			x: 100,
 			y: 10,
 			width: 80,
-			height: 50,
+			height: 40,
 			fill: 'green'
 		};
 
@@ -89,20 +90,20 @@
 			children: [newRect, newellipse, newCircle]
 		});
 		console.log('newGroup: ', newGroup);
-		console.log(' newGroup.children[0].id: ',  newGroup.children[0].id);
 
 		svgEditor(setElementParameters)({
 			id: newGroup.id,
 			y: 50
 		});
 
-		for (let i = 1; i <= 10; i++) {
+		for (let i = 1; i <= 5; i++) {
 			setTimeout(
 				() => {
-					svgEditor(setElementParameters)({
-						id: newPolyline.id,
-						y: i * 10,
-						width: i * 10
+					svgEditor(addElementParameters)({
+						id: newGroup.id,
+						y: 5,
+						width: 5,
+						height: 5
 					});
 				},
 				i * 100

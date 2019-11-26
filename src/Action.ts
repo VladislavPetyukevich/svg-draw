@@ -62,3 +62,39 @@ export const setElementParameters = (stateChanger: StateChanger, parameters: Par
       return changedElement;
     }
   );
+
+export const addElementParameters = (stateChanger: StateChanger, parameters: Partial<Element>) =>
+  stateChanger(
+    (state: State, setState: SetState) => {
+      if ((parameters.id !== 0) && !parameters.id) {
+        throw new Error('Element id is not specified');
+      }
+      const targetElement = state.elements.find(element => element.id === parameters.id);
+      if (!targetElement) {
+        throw new Error('Element not found');
+      }
+      const addParameters = (element: Element, parameters: Partial<Element>) => {
+        const changedElement = {
+          ...element,
+          ...(parameters.x && element.x && { x: element.x + parameters.x }),
+          ...(parameters.y && element.y && { y: element.y + parameters.y }),
+          ...(parameters.width && element.width && { width: element.width + parameters.width }),
+          ...(parameters.height && element.height && { height: element.height + parameters.height }),
+          ...(parameters.stroke && { stroke: parameters.stroke }),
+          ...(parameters.fill && { fill: parameters.fill }),
+        };
+        return changedElement;
+      }
+      const changedElement = addParameters(targetElement, parameters);
+      if (changedElement.children) {
+        changedElement.children = changedElement.children.map(
+          child => addParameters(child, parameters)
+        );
+      }
+      const newStateElements = state.elements.map(element => (element.id === changedElement.id) ? changedElement : element);
+      setState({
+        elements: newStateElements
+      });
+      return changedElement;
+    }
+  );

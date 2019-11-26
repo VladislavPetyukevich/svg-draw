@@ -1,6 +1,6 @@
 import { createSvgEditor } from './SvgEditor';
 import { initialState } from './State';
-import { addElement, setElementParameters } from './Action';
+import { addElement, setElementParameters, addElementParameters } from './Action';
 import { stateToSvg, combineSVGElementCreators } from './SVG/StateToSvg';
 import { rectCreator } from './SVG/RectCreator';
 import { ellipseCreator } from './SVG/EllipseCreator';
@@ -30,6 +30,7 @@ export {
   stateToSvg,
   addElement,
   setElementParameters,
+  addElementParameters,
   combineSVGElementCreators,
   rectCreator,
   ellipseCreator,
