@@ -27,34 +27,32 @@
 			)
 		);
 
-		const newRect = svgEditor(addElement)({
+		const newRect = {
 			type: 'rect',
 			x: 10,
 			y: 10,
 			width: 10,
 			height: 10,
 			fill: 'red'
-		});
-		console.log('newRect: ', newRect);
+		};
 
-		const newellipse = svgEditor(addElement)({
+		const newellipse = {
 			type: 'ellipse',
 			x: 100,
 			y: 10,
 			width: 80,
 			height: 50,
 			fill: 'green'
-		});
-		console.log('newellipse: ', newellipse);
+		};
 
-		const newCircle = svgEditor(addElement)({
+		const newCircle = {
 			type: 'circle',
 			x: 120,
 			y: 80,
 			width: 50,
 			height: 50,
 			fill: 'blue'
-		});
+		};
 
 		const newLine = svgEditor(addElement)({
 			type: 'line',
@@ -86,11 +84,23 @@
 			stroke: 'darkmagenta'
 		});
 
+		const newGroup = svgEditor(addElement)({
+			type: 'group',
+			children: [newRect, newellipse, newCircle]
+		});
+		console.log('newGroup: ', newGroup);
+		console.log(' newGroup.children[0].id: ',  newGroup.children[0].id);
+
+		svgEditor(setElementParameters)({
+			id: newGroup.id,
+			y: 50
+		});
+
 		for (let i = 1; i <= 10; i++) {
 			setTimeout(
 				() => {
 					svgEditor(setElementParameters)({
-						id: newRect.id,
+						id: newPolyline.id,
 						y: i * 10,
 						width: i * 10
 					});

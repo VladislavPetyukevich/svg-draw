@@ -4,16 +4,18 @@ export type ElementType =
   'circle' |
   'line' |
   'polygon' |
-  'polyline';
+  'polyline' |
+  'group';
 
 export interface Element {
   id: number;
   type: ElementType;
-  x: number;
-  y: number;
-  width: number;
-  height: number;
+  x?: number;
+  y?: number;
+  width?: number;
+  height?: number;
   points?: string;
+  children?: Element[];
   fill?: string;
   stroke?: string;
 }

@@ -6,6 +6,12 @@ export const pointsPropertyWrapper = (elementCreator: SVGElementsCreator) =>
     if (!element.points) {
       throw new Error('Element points are not specified');
     }
+    if(!element.x || !element.y) {
+      throw new Error('Element x or y are not specified');
+    }
+    if(!element.width || !element.height) {
+      throw new Error('Element width or height are not specified');
+    }
     const newElement = elementCreator(element);
     const pointsWithoutSpaces = element.points.split(' ').join(',');
 

@@ -8,20 +8,32 @@ export type Action = (state: State, setState: SetState) => Element;
 export const addElement = (stateChanger: StateChanger, parameters: Partial<Element>) =>
   stateChanger(
     (state: State, setState: SetState) => {
-      if (!parameters.type) {
-        throw new Error('Element type is not specified');
-      }
-      const newElement: Element = {
-        id: state.elements.length,
-        type: parameters.type,
-        x: parameters.x || 0,
-        y: parameters.y || 0,
-        width: parameters.width || 0,
-        height: parameters.height || 0,
-        fill: parameters.fill,
-        stroke: parameters.stroke,
-        points: parameters.points,
+      let lastId = state.elements.length - 1;
+      const createElement = (parameters: Partial<Element>): Element => {
+        if (!parameters.type) {
+          throw new Error('Element type is not specified');
+        }
+        lastId++;
+        return {
+          id: lastId,
+          type: parameters.type,
+          x: parameters.x || 0,
+          y: parameters.y || 0,
+          width: parameters.width || 0,
+          height: parameters.height || 0,
+          fill: parameters.fill,
+          stroke: parameters.stroke,
+          points: parameters.points,
+          children: parameters.children
+        };
       };
+      const newElement = createElement(parameters);
+      if (newElement.type === 'group') {
+        if (!newElement.children) {
+          throw new Error('Group children is not specified');
+        }
+        newElement.children = newElement.children.map(element => createElement(element));
+      }
       setState({
         elements: [...state.elements, newElement]
       });

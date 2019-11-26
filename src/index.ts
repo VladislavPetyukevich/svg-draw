@@ -8,6 +8,7 @@ import { circleCreator } from './SVG/CircleCreator';
 import { lineCreator } from './SVG/LineCreator';
 import { polygonCreator } from './SVG/PolygonCreator';
 import { polylineCreator } from './SVG/PolylineCreator';
+import { groupCreator } from './SVG/GroupCreator';
 import { colorPropertiesWrapper } from './SVG/ColorPropertiesWrapper';
 import { pointsPropertyWrapper } from './SVG/PointsPropertyWrapper';
 
@@ -17,7 +18,8 @@ const svgElementCreators = {
   circle: colorPropertiesWrapper(circleCreator),
   line: colorPropertiesWrapper(lineCreator),
   polygon: colorPropertiesWrapper(pointsPropertyWrapper(polygonCreator)),
-  polyline: colorPropertiesWrapper(pointsPropertyWrapper(polylineCreator))
+  polyline: colorPropertiesWrapper(pointsPropertyWrapper(polylineCreator)),
+  group: groupCreator
 };
 
 const stateToSvgMapper = combineSVGElementCreators(svgElementCreators);
