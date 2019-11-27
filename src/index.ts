@@ -9,16 +9,16 @@ import { lineCreator } from './SVG/LineCreator';
 import { polygonCreator } from './SVG/PolygonCreator';
 import { polylineCreator } from './SVG/PolylineCreator';
 import { groupCreator } from './SVG/GroupCreator';
-import { colorPropertiesWrapper } from './SVG/ColorPropertiesWrapper';
+import { commonPropertiesWrapper } from './SVG/CommonPropertiesWrapper';
 import { pointsPropertyWrapper } from './SVG/PointsPropertyWrapper';
 
 const svgElementCreators = {
-  rect: colorPropertiesWrapper(rectCreator),
-  ellipse: colorPropertiesWrapper(ellipseCreator),
-  circle: colorPropertiesWrapper(circleCreator),
-  line: colorPropertiesWrapper(lineCreator),
-  polygon: colorPropertiesWrapper(pointsPropertyWrapper(polygonCreator)),
-  polyline: colorPropertiesWrapper(pointsPropertyWrapper(polylineCreator)),
+  rect: commonPropertiesWrapper(rectCreator),
+  ellipse: commonPropertiesWrapper(ellipseCreator),
+  circle: commonPropertiesWrapper(circleCreator),
+  line: commonPropertiesWrapper(lineCreator),
+  polygon: commonPropertiesWrapper(pointsPropertyWrapper(polygonCreator)),
+  polyline: commonPropertiesWrapper(pointsPropertyWrapper(polylineCreator)),
   group: groupCreator
 };
 
