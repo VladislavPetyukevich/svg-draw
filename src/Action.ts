@@ -16,6 +16,8 @@ export const addElement = (stateChanger: StateChanger, parameters: Partial<Eleme
         lastId++;
         return {
           id: lastId,
+          domId: parameters.domId,
+          class: parameters.class,
           type: parameters.type,
           x: parameters.x || 0,
           y: parameters.y || 0,

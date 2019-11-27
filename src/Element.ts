@@ -10,6 +10,8 @@ export type ElementType =
 export interface Element {
   id: number;
   type: ElementType;
+  domId?: string;
+  class?: string;
   x?: number;
   y?: number;
   width?: number;
