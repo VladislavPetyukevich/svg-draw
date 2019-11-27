@@ -89,6 +89,8 @@
 
 		const newGroup = svgEditor(addElement)({
 			type: 'group',
+			domId: 'testGroup',
+			class: 'group',
 			children: [newRect, newellipse, newCircle]
 		});
 		console.log('newGroup: ', newGroup);

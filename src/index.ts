@@ -9,18 +9,19 @@ import { lineCreator } from './SVG/LineCreator';
 import { polygonCreator } from './SVG/PolygonCreator';
 import { polylineCreator } from './SVG/PolylineCreator';
 import { groupCreator } from './SVG/GroupCreator';
-import { commonPropertiesWrapper } from './SVG/Wrapper/CommonPropertiesWrapper';
+import { idClassPropertiesWrapper } from './SVG/Wrapper/IdClassPropertiesWrapper copy';
+import { colorPropertiesWrapper } from './SVG/Wrapper/ColorPropertiesWrapper';
 import { pointsPropertyWrapper } from './SVG/Wrapper/PointsPropertyWrapper';
 import { wrap } from './SVG/Wrapper/Wrap';
 
 const svgElementCreators = {
-  rect: wrap(rectCreator, [commonPropertiesWrapper]),
-  ellipse: wrap(ellipseCreator, [commonPropertiesWrapper]),
-  circle: wrap(circleCreator, [commonPropertiesWrapper]),
-  line: wrap(lineCreator, [commonPropertiesWrapper]),
-  polygon: wrap(polygonCreator, [commonPropertiesWrapper, pointsPropertyWrapper]),
-  polyline: wrap(polylineCreator, [commonPropertiesWrapper, pointsPropertyWrapper]),
-  group: groupCreator
+  rect: wrap(rectCreator, [idClassPropertiesWrapper, colorPropertiesWrapper]),
+  ellipse: wrap(ellipseCreator, [idClassPropertiesWrapper, colorPropertiesWrapper]),
+  circle: wrap(circleCreator, [idClassPropertiesWrapper, colorPropertiesWrapper]),
+  line: wrap(lineCreator, [idClassPropertiesWrapper, colorPropertiesWrapper]),
+  polygon: wrap(polygonCreator, [idClassPropertiesWrapper, colorPropertiesWrapper, pointsPropertyWrapper]),
+  polyline: wrap(polylineCreator, [idClassPropertiesWrapper, colorPropertiesWrapper, pointsPropertyWrapper]),
+  group: wrap(groupCreator, [idClassPropertiesWrapper])
 };
 
 const stateToSvgMapper = combineSVGElementCreators(svgElementCreators);
