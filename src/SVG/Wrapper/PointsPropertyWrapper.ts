@@ -1,8 +1,8 @@
-import { SVGElementsCreator } from './StateToSvg';
 import { Element } from '@/Element';
+import { Wrapper } from './Wrap';
 
-export const pointsPropertyWrapper = (elementCreator: SVGElementsCreator) =>
-  (element: Element) => {
+export const pointsPropertyWrapper: Wrapper = (element: Element) =>
+  (domElement: SVGElement) => {
     if (!element.points) {
       throw new Error('Element points are not specified');
     }
@@ -12,7 +12,6 @@ export const pointsPropertyWrapper = (elementCreator: SVGElementsCreator) =>
     if(!element.width || !element.height) {
       throw new Error('Element width or height are not specified');
     }
-    const newElement = elementCreator(element);
     const pointsWithoutSpaces = element.points.split(' ').join(',');
 
     const getPointsValues = (points: number[], isXValues: boolean) =>
@@ -46,6 +45,6 @@ export const pointsPropertyWrapper = (elementCreator: SVGElementsCreator) =>
     const newPointsY = Math.min.apply(undefined, getPointsValues(scaledPoints, false));
     const translatedPoints = translatePoints(scaledPoints, element.x - newPointsX, element.y - newPointsY);
 
-    newElement.setAttribute('points', `${translatedPoints.join(',')}`);
-    return newElement;
+    domElement.setAttribute('points', `${translatedPoints.join(',')}`);
+    return domElement;
   };
