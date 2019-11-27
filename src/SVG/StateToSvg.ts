@@ -11,18 +11,17 @@ export const stateToSvg: StateToSvg = (svgContainer: SVGElement, svgElementsCrea
   const elementsGroup = document.createElementNS('http://www.w3.org/2000/svg', 'g');
   svgContainer.appendChild(elementsGroup);
   return (state: State) => {
-    const getDomElements = (element: Element): SVGElement[] => {
-      if (!element.children) {
-        return [svgElementsCreator(element)];
+    const getDomElement = (element: Element): SVGElement => {
+      const domElement = svgElementsCreator(element);
+      if (element.children) {
+        element.children.forEach(
+          child => domElement.appendChild(svgElementsCreator(child))
+        );
       }
-      return element.children.reduce(
-        (elements: SVGElement[], element) => [...elements, ...getDomElements(element)],
-        []);
+      return domElement;
     }
 
-    const domElements = state.elements.map(getDomElements).reduce(
-      (elements: SVGElement[], element) => [...elements, ...element], []
-    );
+    const domElements = state.elements.map(getDomElement);
     const elementsGroupInnerHTML = domElements.reduce(
       (innerHTML, element) => innerHTML += element.outerHTML,
       ''
