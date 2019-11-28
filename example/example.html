@@ -14,19 +14,12 @@
 	<script type="text/javascript">
 		const svgContainer = document.getElementById('svgContainer');
 		const {
-			initializeSvgEditor,
-			initialState,
-			stateToSvg,
+			createSvgEditor,
 			addElement,
 			setElementParameters,
-			addElementParameters,
-			stateToSvgMapper
+			addElementParameters
 		} = SvgEditor;
-		const svgEditor = initializeSvgEditor(
-			initialState(
-				stateToSvg(svgContainer, stateToSvgMapper)
-			)
-		);
+		const svgEditor = createSvgEditor(svgContainer);
 
 		const newRect = {
 			type: 'rect',
