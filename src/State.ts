@@ -6,7 +6,7 @@ export interface State {
   elements: Element[]
 }
 
-export type StateChanger = (action: Action) => Partial<Element>;
+export type StateChanger = (action: Action) => Element;
 
 export type SetState = (newState: State) => State;
 
