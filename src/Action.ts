@@ -82,8 +82,6 @@ export const addElementParameters = (stateChanger: StateChanger, parameters: Par
           ...(parameters.y && element.y && { y: element.y + parameters.y }),
           ...(parameters.width && element.width && { width: element.width + parameters.width }),
           ...(parameters.height && element.height && { height: element.height + parameters.height }),
-          ...(parameters.stroke && { stroke: parameters.stroke }),
-          ...(parameters.fill && { fill: parameters.fill }),
         };
         return changedElement;
       }
