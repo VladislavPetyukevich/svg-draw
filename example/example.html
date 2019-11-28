@@ -14,7 +14,7 @@
 	<script type="text/javascript">
 		const svgContainer = document.getElementById('svgContainer');
 		const {
-			createSvgEditor,
+			initializeSvgEditor,
 			initialState,
 			stateToSvg,
 			addElement,
@@ -22,7 +22,7 @@
 			addElementParameters,
 			stateToSvgMapper
 		} = SvgEditor;
-		const svgEditor = createSvgEditor(
+		const svgEditor = initializeSvgEditor(
 			initialState(
 				stateToSvg(svgContainer, stateToSvgMapper)
 			)

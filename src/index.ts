@@ -1,4 +1,4 @@
-import { createSvgEditor } from './SvgEditor';
+import { initializeSvgEditor } from './SvgEditor';
 import { initialState } from './State';
 import { addElement, setElementParameters, addElementParameters } from './Action';
 import { stateToSvg, combineSVGElementCreators } from './SVG/StateToSvg';
@@ -26,8 +26,10 @@ const svgElementCreators = {
 
 const stateToSvgMapper = combineSVGElementCreators(svgElementCreators);
 
+
+
 export {
-  createSvgEditor,
+  initializeSvgEditor,
   initialState,
   stateToSvg,
   addElement,
