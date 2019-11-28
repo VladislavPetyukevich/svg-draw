@@ -26,7 +26,7 @@ const svgElementCreators = {
 
 const stateToSvgMapper = combineSVGElementCreators(svgElementCreators);
 
-const createSvgEditor = (svgElement: SVGElement) =>
+const createSvgEditor = (svgElement: SVGSVGElement) =>
   initializeSvgEditor(
     initialState(
       stateToSvg(svgElement, stateToSvgMapper)

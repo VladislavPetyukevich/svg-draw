@@ -1,13 +1,13 @@
 import { State } from '@/State';
 import { Element, ElementType } from '@/Element';
 
-type StateToSvg = (svgContainer: SVGElement, stateToSvgMapper: SVGElementsCreator) => StateToSvgChanger;
+type StateToSvg = (svgContainer: SVGSVGElement, stateToSvgMapper: SVGElementsCreator) => StateToSvgChanger;
 
 export type StateToSvgChanger = (state: State) => void;
 
 export type SVGElementsCreator = (element: Element) => SVGElement;
 
-export const stateToSvg: StateToSvg = (svgContainer: SVGElement, svgElementsCreator: SVGElementsCreator) => {
+export const stateToSvg: StateToSvg = (svgContainer: SVGSVGElement, svgElementsCreator: SVGElementsCreator) => {
   const elementsGroup = document.createElementNS('http://www.w3.org/2000/svg', 'g');
   svgContainer.appendChild(elementsGroup);
   return (state: State) => {
