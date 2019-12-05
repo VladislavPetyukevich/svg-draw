@@ -2,7 +2,7 @@ import { createSvgEditor, addElement, addElementParameters } from '../src/index'
 
 const svgContainer = document.getElementById('svgContainer');
 if (!svgContainer) {
-  throw new Error('svgContainer no found');
+  throw new Error('svgContainer not found');
 }
 if (!(svgContainer instanceof SVGSVGElement)) {
   throw new Error('svgContainer are not instanse of SVGSVGElement');
