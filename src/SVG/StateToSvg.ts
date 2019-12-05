@@ -14,9 +14,15 @@ export const stateToSvg: StateToSvg = (svgContainer: SVGSVGElement, svgElementsC
     const getDomElement = (element: Element): SVGElement => {
       const domElement = svgElementsCreator(element);
       if (element.children) {
-        element.children.forEach(
-          child => domElement.appendChild(svgElementsCreator(child))
-        );
+        element.children.forEach(child => {
+          if (!child.id && element.id !== 0) {
+            throw new Error('Child id are not defined');
+          }
+          if (!child.type) {
+            throw new Error('Child type are not defined');
+          }
+          return domElement.appendChild(svgElementsCreator(child as Element))
+        });
       }
       return domElement;
     }

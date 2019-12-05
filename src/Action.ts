@@ -75,9 +75,17 @@ export const addElementParameters = (stateChanger: StateChanger, parameters: Par
       if (!targetElement) {
         throw new Error('Element not found');
       }
-      const addParameters = (element: Element, parameters: Partial<Element>) => {
+      const addParameters = (element: Partial<Element>, parameters: Partial<Element>) => {
+        if (!element.id && element.id !== 0) {
+          throw new Error('Element id are not defined');
+        }
+        if (!element.type) {
+          throw new Error('Element type are not defined');
+        }
         const changedElement = {
           ...element,
+          id: element.id,
+          type: element.type,
           ...(parameters.x && element.x && { x: element.x + parameters.x }),
           ...(parameters.y && element.y && { y: element.y + parameters.y }),
           ...(parameters.width && element.width && { width: element.width + parameters.width }),

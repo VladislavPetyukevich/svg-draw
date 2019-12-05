@@ -17,7 +17,7 @@ export interface Element {
   width?: number;
   height?: number;
   points?: string;
-  children?: Element[];
+  children?: Partial<Element>[];
   fill?: string;
   stroke?: string;
 }
