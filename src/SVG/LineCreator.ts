@@ -1,10 +1,10 @@
 import { SVGElementsCreator } from './StateToSvg';
 
 export const lineCreator: SVGElementsCreator = (element) => {
-  if(!element.x || !element.y) {
+  if ((typeof element.x !== 'number') || (typeof element.y !== 'number')) {
     throw new Error('Element x or y are not specified');
   }
-  if(!element.width || !element.height) {
+  if ((typeof element.width !== 'number') || (typeof element.height !== 'number')) {
     throw new Error('Element width or height are not specified');
   }
   const newLine = document.createElementNS('http://www.w3.org/2000/svg', 'line');
