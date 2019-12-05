@@ -2,18 +2,12 @@ const path = require('path');
 
 const PATHS = {
   source: path.resolve(__dirname, 'src'),
+  exampleSource: path.resolve(__dirname, 'example'),
   build: path.resolve(__dirname, 'build'),
   root: path.resolve(__dirname)
 };
 
 const commonConfig = {
-  entry: path.resolve(PATHS.source, 'index.ts'),
-  output: {
-    library: 'SvgEditor',
-    libraryTarget: 'umd',
-    path: PATHS.build,
-    filename: 'SvgEditor.umd.js'
-  },
   resolve: {
     extensions: ['.js', '.ts'],
     alias: {
@@ -35,6 +29,10 @@ const commonConfig = {
 };
 
 const devConfig = {
+  entry: path.resolve(PATHS.exampleSource, 'example.ts'),
+  output: {
+    filename: 'example.js'
+  },
   mode: 'development',
   devtool: 'eval',
   devServer: {
@@ -46,6 +44,13 @@ const devConfig = {
 };
 
 const prodConfig = {
+  entry: path.resolve(PATHS.source, 'index.ts'),
+  output: {
+    library: 'SvgEditor',
+    libraryTarget: 'umd',
+    path: PATHS.build,
+    filename: 'SvgEditor.umd.js'
+  },
   mode: 'production'
 };
 
