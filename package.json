@@ -1,8 +1,8 @@
 {
   "name": "svg-editor",
   "version": "0.2.0",
-  "main": "./build/index.js",
-  "types": "./build/index.d.ts",
+  "main": "./build/src/index.js",
+  "types": "./build/src/index.d.ts",
   "private": true,
   "devDependencies": {
     "awesome-typescript-loader": "^5.2.1",

@@ -3,7 +3,7 @@ const path = require('path');
 const PATHS = {
   source: path.resolve(__dirname, 'src'),
   exampleSource: path.resolve(__dirname, 'example'),
-  build: path.resolve(__dirname, 'build'),
+  build: path.resolve(__dirname, 'build', 'src'),
   root: path.resolve(__dirname)
 };
 
