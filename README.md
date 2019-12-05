@@ -29,7 +29,6 @@ Small js svg editor.
 **addElementParameters** - add values for element parameters (used for x, y, width and height)  
 
 ## Example
-In React:  
 ```javascript
 const svgContainer = document.getElementById('svgContainer');
 if (!svgContainer) {
