@@ -30,6 +30,8 @@ Small js svg editor.
 
 ## Example
 ```javascript
+import { createSvgEditor, addElement, addElementParameters, setElementParameters } from 'svg-editor';
+
 const svgContainer = document.getElementById('svgContainer');
 if (!svgContainer) {
   throw new Error('svgContainer not found');
