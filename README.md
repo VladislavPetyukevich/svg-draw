@@ -40,7 +40,7 @@ if (!(svgContainer instanceof SVGSVGElement)) {
   throw new Error('svgContainer are not instanse of SVGSVGElement');
 }
 
-const svgEditor = createSvgEditor(svgContainer.current);
+const svgEditor = createSvgEditor(svgContainer);
 const rect = svgEditor(addElement)({
   type: 'rect',
   x: 10,
