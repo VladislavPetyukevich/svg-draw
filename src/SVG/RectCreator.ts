@@ -1,6 +1,6 @@
 import { SVGElementsCreator } from './StateToSvg';
 
-export const rectCreator: SVGElementsCreator = (element) => {
+export const rectCreator: SVGElementsCreator = (document, element) => {
   if ((typeof element.x !== 'number') || (typeof element.y !== 'number')) {
     throw new Error('Element x or y are not specified');
   }

@@ -5,8 +5,8 @@ export type Wrapper =
   (element: Element) => (domElement: SVGElement) => SVGElement;
 
 export const wrap = (elementCreator: SVGElementsCreator, wrappers: Wrapper[]) =>
-  (element: Element): SVGElement =>
+  (document: Document, element: Element): SVGElement =>
     wrappers.reduce(
       (domElement, wrapper) => wrapper(element)(domElement),
-      elementCreator(element)
+      elementCreator(document, element)
     );

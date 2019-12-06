@@ -1,6 +1,6 @@
 import { SVGElementsCreator } from './StateToSvg';
 
-export const circleCreator: SVGElementsCreator = (element) => {
+export const circleCreator: SVGElementsCreator = (document, element) => {
   if ((typeof element.x !== 'number') || (typeof element.y !== 'number')) {
     throw new Error('Element x or y are not specified');
   }

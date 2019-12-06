@@ -8,7 +8,7 @@ if (!(svgContainer instanceof SVGSVGElement)) {
   throw new Error('svgContainer are not instanse of SVGSVGElement');
 }
 
-const svgEditor = createSvgEditor(svgContainer);
+const svgEditor = createSvgEditor(document, svgContainer);
 
 const group = svgEditor(addElement)({
   type: 'group',

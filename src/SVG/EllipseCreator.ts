@@ -1,6 +1,6 @@
 import { SVGElementsCreator } from './StateToSvg';
 
-export const ellipseCreator: SVGElementsCreator = (element) => {
+export const ellipseCreator: SVGElementsCreator = (document, element) => {
   if ((typeof element.x !== 'number') || (typeof element.y !== 'number')) {
     throw new Error('Element x or y are not specified');
   }
