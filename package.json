@@ -5,9 +5,16 @@
   "types": "./build/src/index.d.ts",
   "private": true,
   "devDependencies": {
+    "@types/chai": "^4.2.6",
+    "@types/mocha": "^5.2.7",
+    "@types/sinon": "^7.5.1",
     "awesome-typescript-loader": "^5.2.1",
+    "chai": "^4.2.0",
+    "mocha": "^6.2.2",
     "rimraf": "^3.0.0",
+    "sinon": "^7.5.0",
     "source-map-loader": "^0.2.4",
+    "ts-node-dev": "^1.0.0-pre.44",
     "typescript": "^3.6.4",
     "webpack": "^4.29.6",
     "webpack-cli": "^3.2.3",
@@ -16,6 +23,7 @@
   "scripts": {
     "start": "webpack-dev-server --env development --open",
     "test-front": "webpack-dev-server --env test --open",
+    "test": "mocha -r ts-node/register tests/**/*.test.ts",
     "prebuild": "rimraf build",
     "build": "tsc -m es6 --outDir build && webpack --env production"
   }
