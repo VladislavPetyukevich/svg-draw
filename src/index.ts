@@ -9,7 +9,7 @@ import { lineCreator } from './SVG/LineCreator';
 import { polygonCreator } from './SVG/PolygonCreator';
 import { polylineCreator } from './SVG/PolylineCreator';
 import { groupCreator } from './SVG/GroupCreator';
-import { idClassPropertiesWrapper } from './SVG/Wrapper/IdClassPropertiesWrapper copy';
+import { idClassPropertiesWrapper } from './SVG/Wrapper/IdClassPropertiesWrapper';
 import { colorPropertiesWrapper } from './SVG/Wrapper/ColorPropertiesWrapper';
 import { pointsPropertyWrapper } from './SVG/Wrapper/PointsPropertyWrapper';
 import { wrap } from './SVG/Wrapper/Wrap';
