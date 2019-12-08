@@ -41,4 +41,33 @@ describe('CircleCreator', () => {
     const setAttributeArgs = setAttribute.getCalls().map(call => call.args);
     expect(expectedSetAttributeArgs).deep.equal(setAttributeArgs);
   });
+
+  it('should throw coordinates exception', () => {
+    const incorrectElement = {};
+    expect(
+      () => circleCreator(document as any, incorrectElement as any)
+    ).throw('Element x or y are not specified');
+  });
+
+  it('should throw size exception', () => {
+    const incorrectElement = {
+      x: 10,
+      y: 10
+    };
+    expect(
+      () => circleCreator(document as any, incorrectElement as any)
+    ).throw('Element width or height are not specified');
+  });
+
+  it('should throw not equal width and height exception', () => {
+    const incorrectElement = {
+      x: 10,
+      y: 10,
+      width: 20,
+      height: 10
+    };
+    expect(
+      () => circleCreator(document as any, incorrectElement as any)
+    ).throw('Circle width and height are not the same');
+  });
 });

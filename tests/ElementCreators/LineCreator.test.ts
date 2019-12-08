@@ -47,4 +47,21 @@ describe('LineCreator', () => {
     const setAttributeArgs = setAttribute.getCalls().map(call => call.args);
     expect(expectedSetAttributeArgs).deep.equal(setAttributeArgs);
   });
+
+  it('should throw coordinates exception', () => {
+    const incorrectElement = {};
+    expect(
+      () => lineCreator(document as any, incorrectElement as any)
+    ).throw('Element x or y are not specified');
+  });
+
+  it('should throw size exception', () => {
+    const incorrectElement = {
+      x: 10,
+      y: 10
+    };
+    expect(
+      () => lineCreator(document as any, incorrectElement as any)
+    ).throw('Element width or height are not specified');
+  });
 });
