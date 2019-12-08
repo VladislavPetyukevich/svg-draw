@@ -46,7 +46,7 @@ export const addElement = (stateChanger: StateChanger, parameters: Partial<Eleme
 export const setElementParameters = (stateChanger: StateChanger, parameters: Partial<Element>) =>
   stateChanger(
     (state: State, setState: SetState) => {
-      if ((parameters.id !== 0) && !parameters.id) {
+      if (!parameters.id && parameters.id !== 0) {
         throw new Error('Element id is not specified');
       }
       const targetElement = state.elements.find(element => element.id === parameters.id);
@@ -68,7 +68,7 @@ export const setElementParameters = (stateChanger: StateChanger, parameters: Par
 export const addElementParameters = (stateChanger: StateChanger, parameters: Partial<Element>) =>
   stateChanger(
     (state: State, setState: SetState) => {
-      if ((parameters.id !== 0) && !parameters.id) {
+      if (!parameters.id && parameters.id !== 0) {
         throw new Error('Element id is not specified');
       }
       const targetElement = state.elements.find(element => element.id === parameters.id);

@@ -15,7 +15,7 @@ export const stateToSvg: StateToSvg = (document: Document, svgContainer: SVGSVGE
       const domElement = svgElementsCreator(document, element);
       if (element.children) {
         element.children.forEach(child => {
-          if (!child.id && element.id !== 0) {
+          if (!child.id && child.id !== 0) {
             throw new Error('Child id are not defined');
           }
           if (!child.type) {
