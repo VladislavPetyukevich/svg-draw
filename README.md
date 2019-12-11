@@ -1,5 +1,5 @@
 # Svg-Editor
-Small js svg editor.
+Small js svg editor without dependencies.
 
 ## Supported element types:
 * rect
