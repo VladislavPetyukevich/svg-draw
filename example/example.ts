@@ -9,8 +9,10 @@ if (!(svgContainer instanceof SVGSVGElement)) {
 }
 
 const svgEditor = createSvgEditor(document, svgContainer);
+const svgAddElement = svgEditor(addElement);
+const svgAddElementParameters = svgEditor(addElementParameters);
 
-const group = svgEditor(addElement)({
+const group = svgAddElement({
   type: 'group',
   children: [
     {
@@ -43,7 +45,7 @@ const group = svgEditor(addElement)({
 for (let i = 1; i <= 5; i++) {
   setTimeout(
     () => {
-      svgEditor(addElementParameters)({
+      svgAddElementParameters({
         id: group.id,
         y: 5,
       });
@@ -52,7 +54,7 @@ for (let i = 1; i <= 5; i++) {
   );
 }
 
-const group2 = svgEditor(addElement)({
+const group2 = svgAddElement({
   type: 'group',
   children: [
     {
@@ -88,7 +90,7 @@ const group2 = svgEditor(addElement)({
 for (let i = 1; i <= 5; i++) {
   setTimeout(
     () => {
-      svgEditor(addElementParameters)({
+      svgAddElementParameters({
         id: group2.id,
         y: 5,
         height: -5
@@ -98,7 +100,7 @@ for (let i = 1; i <= 5; i++) {
   );
 }
 
-svgEditor(addElement)({
+svgAddElement({
   type: 'text',
   x: 60,
   y: 20,

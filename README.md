@@ -29,7 +29,7 @@ Small js svg editor.
 ## Actions
 **addElement** - create new element and add it to svg  
 **setElementParameters** - set element parameters  
-**addElementParameters** - add values for element parameters (used for x, y, width and height)  
+**addElementParameters** - adds values for element parameters (used for x, y, width and height)  
 
 ## Example
 ```javascript
@@ -44,7 +44,11 @@ if (!(svgContainer instanceof SVGSVGElement)) {
 }
 
 const svgEditor = createSvgEditor(document, svgContainer);
-const rect = svgEditor(addElement)({
+const svgAddElement = svgEditor(addElement);
+const svgSetElementParameters = svgEditor(setElementParameters);
+const svgAddElementParameters = svgEditor(addElementParameters);
+
+const rect = svgAddElement({
   type: 'rect',
   x: 10,
   y: 10,
@@ -52,11 +56,13 @@ const rect = svgEditor(addElement)({
   height: 10,
   fill: 'red'
 });
-svgEditor(setElementParameters)({
+
+svgSetElementParameters({
   id: rect.id,
   x: 20
 });
-svgEditor(addElementParameters)({
+
+svgAddElementParameters({
   id: rect.id,
   width: 10
 });
