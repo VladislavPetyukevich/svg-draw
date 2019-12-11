@@ -9,6 +9,7 @@ Small js svg editor.
 * polygon
 * polyline
 * group
+* text
 
 ## Element properties:
 **type**: ElementType; // rect, ellipse, circle, line, polygon, polyline, group  
@@ -21,7 +22,9 @@ Small js svg editor.
 **points?**: string; // used for polygon and polyline  
 **children?**: Partial<Element>[]; // used for group  
 **fill?**: string;  
-**stroke?**: string;
+**stroke?**: string;  
+**text?**: string; // used for text  
+**fontSize?**: number; // used for text  
 
 ## Actions
 **addElement** - create new element and add it to svg  

@@ -9,6 +9,7 @@ import { lineCreator } from './SVG/LineCreator';
 import { polygonCreator } from './SVG/PolygonCreator';
 import { polylineCreator } from './SVG/PolylineCreator';
 import { groupCreator } from './SVG/GroupCreator';
+import { textCreator } from './SVG/TextCreator';
 import { idClassPropertiesWrapper } from './SVG/Wrapper/IdClassPropertiesWrapper';
 import { colorPropertiesWrapper } from './SVG/Wrapper/ColorPropertiesWrapper';
 import { pointsPropertyWrapper } from './SVG/Wrapper/PointsPropertyWrapper';
@@ -21,7 +22,8 @@ const svgElementCreators = {
   line: wrap(lineCreator, [idClassPropertiesWrapper, colorPropertiesWrapper]),
   polygon: wrap(polygonCreator, [idClassPropertiesWrapper, colorPropertiesWrapper, pointsPropertyWrapper]),
   polyline: wrap(polylineCreator, [idClassPropertiesWrapper, colorPropertiesWrapper, pointsPropertyWrapper]),
-  group: wrap(groupCreator, [idClassPropertiesWrapper])
+  group: wrap(groupCreator, [idClassPropertiesWrapper]),
+  text: wrap(textCreator, [idClassPropertiesWrapper, colorPropertiesWrapper])
 };
 
 const stateToSvgMapper = combineSVGElementCreators(svgElementCreators);

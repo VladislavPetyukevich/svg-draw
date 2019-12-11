@@ -26,7 +26,9 @@ export const addElement = (stateChanger: StateChanger, parameters: Partial<Eleme
           fill: parameters.fill,
           stroke: parameters.stroke,
           points: parameters.points,
-          children: parameters.children
+          children: parameters.children,
+          text: parameters.text,
+          fontSize: parameters.fontSize
         };
       };
       const newElement = createElement(parameters);

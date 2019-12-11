@@ -97,3 +97,11 @@ for (let i = 1; i <= 5; i++) {
     i * 100
   );
 }
+
+svgEditor(addElement)({
+  type: 'text',
+  x: 60,
+  y: 20,
+  text: 'Sample text',
+  fontSize: 20
+});

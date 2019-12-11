@@ -5,7 +5,8 @@ export type ElementType =
   'line' |
   'polygon' |
   'polyline' |
-  'group';
+  'group' |
+  'text';
 
 export interface Element {
   id: number;
@@ -20,4 +21,6 @@ export interface Element {
   children?: Partial<Element>[];
   fill?: string;
   stroke?: string;
+  text?: string;
+  fontSize?: number;
 }

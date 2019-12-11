@@ -39,6 +39,8 @@ describe('addElement', () => {
       class: undefined,
       domId: undefined,
       fill: undefined,
+      fontSize: undefined,
+      text: undefined,
       height: 0,
       id: 1,
       points: undefined,
@@ -77,7 +79,9 @@ describe('addElement', () => {
             domId: undefined,
             fill: undefined,
             points: undefined,
-            stroke: undefined
+            stroke: undefined,
+            fontSize: undefined,
+            text: undefined
           }
         ]
       }]];
