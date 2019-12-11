@@ -1,6 +1,7 @@
 {
   "name": "svg-edit",
   "version": "1.0.0",
+  "description": "Small js svg editor without dependencies",
   "main": "./build/src/index.js",
   "types": "./build/src/index.d.ts",
   "files": [
@@ -8,6 +9,12 @@
     "tests/"
   ],
   "private": true,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/VladislavPetyukevich/svg-editor"
+  },
+  "license": "gpl-3.0",
+  "homepage": "https://github.com/VladislavPetyukevich/svg-editor#readme",
   "devDependencies": {
     "@types/chai": "^4.2.6",
     "@types/mocha": "^5.2.7",
@@ -29,6 +36,9 @@
     "test-front": "webpack-dev-server --env test --open",
     "test": "mocha -r ts-node/register tests/**/*.test.ts",
     "prebuild": "rimraf build",
-    "build": "tsc -m es6 --outDir build && webpack --env production"
+    "build": "tsc -m es6 --outDir build && webpack --env production",
+    "preversion": "npm test",
+    "version": "npm run build && git add .",
+    "postversion": "git push && git push --tags"
   }
 }
