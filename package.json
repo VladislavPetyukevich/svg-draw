@@ -5,7 +5,6 @@
   "types": "./build/src/index.d.ts",
   "files": [
     "build/",
-    "scr/",
     "tests/"
   ],
   "private": true,
