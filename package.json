@@ -1,5 +1,5 @@
 {
-  "name": "svg-edit",
+  "name": "svg-draw",
   "version": "1.0.1",
   "description": "Small js svg editor without dependencies",
   "main": "./build/src/index.js",
@@ -9,10 +9,10 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/VladislavPetyukevich/svg-editor"
+    "url": "git+https://github.com/VladislavPetyukevich/svg-draw"
   },
   "license": "gpl-3.0",
-  "homepage": "https://github.com/VladislavPetyukevich/svg-editor#readme",
+  "homepage": "https://github.com/VladislavPetyukevich/svg-draw#readme",
   "devDependencies": {
     "@types/chai": "^4.2.6",
     "@types/mocha": "^5.2.7",
