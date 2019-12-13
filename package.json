@@ -7,7 +7,6 @@
   "files": [
     "build/"
   ],
-  "private": true,
   "repository": {
     "type": "git",
     "url": "git+https://github.com/VladislavPetyukevich/svg-editor"
