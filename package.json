@@ -38,6 +38,7 @@
     "build": "tsc -m es6 --outDir build && webpack --env production",
     "preversion": "npm test",
     "version": "npm run build && git add .",
-    "postversion": "git push && git push --tags"
+    "postversion": "git push && git push --tags",
+    "prepublishOnly": "npm run build"
   }
 }
