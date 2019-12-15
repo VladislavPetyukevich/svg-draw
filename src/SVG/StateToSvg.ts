@@ -8,7 +8,7 @@ export type StateToSvgChanger = (state: State) => void;
 export type SVGElementsCreator = (document: Document, element: Element) => SVGElement;
 
 export const stateToSvg: StateToSvg = (document: Document, svgContainer: SVGSVGElement, svgElementsCreator: SVGElementsCreator) => {
-  const elementsGroup = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+  let elementsGroup = document.createElementNS('http://www.w3.org/2000/svg', 'g');
   svgContainer.appendChild(elementsGroup);
   return (state: State) => {
     const getDomElement = (element: Element): SVGElement => {
@@ -28,11 +28,11 @@ export const stateToSvg: StateToSvg = (document: Document, svgContainer: SVGSVGE
     }
 
     const domElements = state.elements.map(getDomElement);
-    const elementsGroupInnerHTML = domElements.reduce(
-      (innerHTML, element) => innerHTML += element.outerHTML,
-      ''
-    );
-    elementsGroup.innerHTML = elementsGroupInnerHTML;
+    let newElementsGroup = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+    domElements.forEach(element => newElementsGroup.appendChild(element));
+    svgContainer.removeChild(elementsGroup);
+    svgContainer.appendChild(newElementsGroup);
+    elementsGroup = newElementsGroup;
   };
 };
 
