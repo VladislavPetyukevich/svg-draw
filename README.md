@@ -1,4 +1,4 @@
-# Svg-Editor
+# Svg-Draw
 Small js svg editor without dependencies.
 
 ## Supported element types:
