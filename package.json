@@ -1,6 +1,6 @@
 {
   "name": "svg-draw",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Small js svg editor without dependencies",
   "main": "./build/src/index.js",
   "types": "./build/src/index.d.ts",
