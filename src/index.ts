@@ -1,4 +1,5 @@
 import { initializeSvgEditor, SvgEditorActionCreator } from './SvgEditor';
+import { Element, ElementType } from './Element';
 import { initialState } from './State';
 import { addElement, setElementParameters, addElementParameters } from './Action';
 import { stateToSvg, combineSVGElementCreators } from './SVG/StateToSvg';
@@ -40,5 +41,7 @@ export {
   addElement,
   setElementParameters,
   addElementParameters,
-  SvgEditorActionCreator
+  SvgEditorActionCreator,
+  Element,
+  ElementType
 };
