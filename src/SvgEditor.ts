@@ -2,7 +2,8 @@ import { ActionCreator } from './Action';
 import { StateChanger } from './State';
 import { Element } from './Element';
 
-type SvgEditor = (actionCreator: ActionCreator) => (actionParameters: Partial<Element>) => Element;
+export type SvgEditorActionCreator = (actionParameters: Partial<Element>) => Element;
+type SvgEditor = (actionCreator: ActionCreator) => SvgEditorActionCreator;
 
 export const initializeSvgEditor = (stateChanger: StateChanger): SvgEditor =>
   (actionCreator: ActionCreator) => (actionParameters: Partial<Element>) =>
