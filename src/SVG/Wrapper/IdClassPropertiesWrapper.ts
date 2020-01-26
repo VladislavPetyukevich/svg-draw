@@ -1,4 +1,4 @@
-import { Element } from '@/Element';
+import { Element } from '../../Element';
 import { Wrapper } from './Wrap';
 
 export const idClassPropertiesWrapper: Wrapper = (element: Element) =>

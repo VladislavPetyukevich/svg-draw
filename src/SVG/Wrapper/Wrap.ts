@@ -1,5 +1,5 @@
-import { SVGElementsCreator } from '@/SVG/StateToSvg';
-import { Element } from '@/Element';
+import { SVGElementsCreator } from '../..//SVG/StateToSvg';
+import { Element } from '../../Element';
 
 export type Wrapper =
   (element: Element) => (domElement: SVGElement) => SVGElement;

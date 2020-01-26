@@ -9,10 +9,7 @@ const PATHS = {
 
 const commonConfig = {
   resolve: {
-    extensions: ['.js', '.ts'],
-    alias: {
-      '@': PATHS.source
-    }
+    extensions: ['.js', '.ts']
   },
   module: {
     rules: [
