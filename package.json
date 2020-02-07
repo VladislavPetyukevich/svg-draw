@@ -1,11 +1,12 @@
 {
   "name": "svg-draw",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "Small js svg editor without dependencies",
   "main": "./build/src/index.js",
   "types": "./build/src/index.d.ts",
   "files": [
-    "build/"
+    "build/",
+    "src/"
   ],
   "repository": {
     "type": "git",
@@ -34,7 +35,7 @@
     "test-front": "webpack-dev-server --env test --open",
     "test": "mocha -r ts-node/register tests/**/*.test.ts",
     "prebuild": "rimraf build",
-    "build": "tsc -m es6 --outDir build && webpack --env production",
+    "build": "tsc -m es6 && webpack --env production",
     "preversion": "npm test",
     "version": "npm run build && git add .",
     "postversion": "git push && git push --tags",
