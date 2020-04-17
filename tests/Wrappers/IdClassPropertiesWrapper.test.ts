@@ -24,9 +24,9 @@ describe('IdClassPropertiesWrapper', () => {
     expect(result).deep.equal(domElement);
   });
 
-  it('should set id and class properties', () => {
+  it('should set id, class and data-id properties', () => {
     idClassPropertiesWrapper(element)(domElement as any);
-    const expectedSetAttributeArgs = [['id', 'testDomId'], ['class', 'testDomClass']];
+    const expectedSetAttributeArgs = [['id', 'testDomId'], ['class', 'testDomClass'], ['data-id', '0']];
     const setAttributeArgs = domElement.setAttribute.getCalls().map(call => call.args);
     expect(expectedSetAttributeArgs).deep.equal(setAttributeArgs);
   });

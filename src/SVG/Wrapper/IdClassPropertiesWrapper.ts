@@ -9,5 +9,6 @@ export const idClassPropertiesWrapper: Wrapper = (element: Element) =>
     if (element.class) {
       domElement.setAttribute('class', `${element.class}`);
     }
+    domElement.setAttribute('data-id', `${element.id}`);
     return domElement;
   };
