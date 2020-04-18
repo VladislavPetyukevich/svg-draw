@@ -30,9 +30,9 @@ describe('CombineSVGElementCreators', () => {
 });
 
 describe('StateToSvg', () => {
-  const groupDomElement = { innerHTML: 'group test innerHTML', appendChild: spy() };
-  const someDomElement = { outerHTML: 'test outerHTML', appendChild: spy() };
-  const someChildDomElement = { innerHTML: 'test child innerHTML' };
+  const someDomElement = { outerHTML: 'test outerHTML', appendChild: spy(), dataset: { id: 0 } };
+  const someChildDomElement = { innerHTML: 'test child innerHTML', dataset: { id: 1 }, getAttribute: () => 1 };
+  const groupDomElement = { innerHTML: 'group test innerHTML', appendChild: spy(), children: [someChildDomElement] };
   const svgElementCreators = {
     someType: () => someDomElement,
     someChildType: () => someChildDomElement
@@ -72,25 +72,5 @@ describe('StateToSvg', () => {
     const appendChildArgs = someDomElement.appendChild.getCalls().map(call => call.args);
     const expectedAppendChildArgs = [[someChildDomElement]];
     expect(expectedAppendChildArgs).deep.equal(appendChildArgs);
-  });
-
-  it('should create new group element', () => {
-    stateToSvg(document as any, svgContainer as any, stateToSvgMapper as any)(state as any);
-    const createElementArgs = document.createElementNS.getCalls().map(call => call.args);
-    const expectedCreateElementArgs = [["http://www.w3.org/2000/svg", "g"], ["http://www.w3.org/2000/svg", "g"]];
-    expect(createElementArgs).deep.equal(expectedCreateElementArgs);
-    const appendChildArgs = groupDomElement.appendChild.getCalls().map(call => call.args);
-    const expectedAppendChildArgs = [[someDomElement]];
-    expect(appendChildArgs).deep.equal(expectedAppendChildArgs);
-  });
-
-  it('should replace old group element with new', () => {
-    stateToSvg(document as any, svgContainer as any, stateToSvgMapper as any)(state as any);
-    const removeChildArgs = svgContainer.removeChild.getCalls().map(call => call.args);
-    const expectedRemoveChildArgs = [[groupDomElement]]
-    expect(removeChildArgs).deep.equal(expectedRemoveChildArgs);
-    const appendChildArgs = svgContainer.appendChild.getCalls().map(call => call.args);
-    const expectedAppendChildArgs = [[groupDomElement], [groupDomElement]];
-    expect(appendChildArgs).deep.equal(expectedAppendChildArgs);
   });
 });

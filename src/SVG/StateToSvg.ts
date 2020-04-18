@@ -8,9 +8,26 @@ export type StateToSvgChanger = (state: State) => void;
 export type SVGElementsCreator = (document: Document, element: Element) => SVGElement;
 
 export const stateToSvg: StateToSvg = (document: Document, svgContainer: SVGSVGElement, svgElementsCreator: SVGElementsCreator) => {
-  let elementsGroup = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+  let oldState: State;
+  const elementsGroup = document.createElementNS('http://www.w3.org/2000/svg', 'g');
   svgContainer.appendChild(elementsGroup);
   return (state: State) => {
+    const changedElements = state.elements.filter((element) => {
+      if (!oldState) {
+        return true;
+      }
+      const oldElement = oldState.elements.find(oldEl => oldEl.id === element.id);
+      if (!oldElement) {
+        return true;
+      }
+
+      return !Object.keys(element).every((elementKey) => {
+        const elementValue = element[elementKey as keyof Element];
+        const oldElementValue = oldElement[elementKey as keyof Element];
+        return elementValue === oldElementValue;
+      });
+    });
+
     const getDomElement = (element: Element): SVGElement => {
       const domElement = svgElementsCreator(document, element);
       if (element.children) {
@@ -27,12 +44,21 @@ export const stateToSvg: StateToSvg = (document: Document, svgContainer: SVGSVGE
       return domElement;
     }
 
-    const domElements = state.elements.map(getDomElement);
-    let newElementsGroup = document.createElementNS('http://www.w3.org/2000/svg', 'g');
-    domElements.forEach(element => newElementsGroup.appendChild(element));
-    svgContainer.removeChild(elementsGroup);
-    svgContainer.appendChild(newElementsGroup);
-    elementsGroup = newElementsGroup;
+    const updateElement = (element: SVGElement) => {
+      const children = Array.from(elementsGroup.children);
+      const oldElement = children.find(
+        childEl => element.dataset.id === childEl.getAttribute('data-id')
+      );
+      if (!oldElement) {
+        elementsGroup.appendChild(element);
+        return;
+      }
+      elementsGroup.replaceChild(element, oldElement);
+    };
+
+    const newDomElements = changedElements.map(getDomElement);
+    newDomElements.forEach(updateElement);
+    oldState = state;
   };
 };
 
