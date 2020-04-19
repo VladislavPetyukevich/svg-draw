@@ -27,6 +27,9 @@ export const stateToSvg: StateToSvg = (document: Document, svgContainer: SVGSVGE
         return elementValue === oldElementValue;
       });
     });
+    const deletedElements = oldState && oldState.elements.filter(oldElement =>
+      !state.elements.find(element => element.id === oldElement.id)
+    );
 
     const getDomElement = (element: Element): SVGElement => {
       const domElement = svgElementsCreator(document, element);
@@ -55,9 +58,22 @@ export const stateToSvg: StateToSvg = (document: Document, svgContainer: SVGSVGE
       }
       elementsGroup.replaceChild(element, oldElement);
     };
+    const deleteElement = (element: Element) => {
+      const children = Array.from(elementsGroup.children);
+      const targetDOMElement = children.find(
+        childEl => `${element.id}` === childEl.getAttribute('data-id')
+      );
+      if (!targetDOMElement) {
+        throw new Error('Element to delete not found in DOM');
+      }
+      elementsGroup.removeChild(targetDOMElement);
+    };
 
     const newDomElements = changedElements.map(getDomElement);
     newDomElements.forEach(updateElement);
+    if (deletedElements) {
+      deletedElements.forEach(deleteElement);
+    }
     oldState = state;
   };
 };

@@ -30,6 +30,7 @@ Small js svg editor without dependencies.
 **addElement** - create new element and add it to svg  
 **setElementParameters** - set element parameters  
 **addElementParameters** - adds values for element parameters (used for x, y, width and height)  
+**removeElement** - remove element from svg  
 
 ## Example
 ```javascript
@@ -47,6 +48,7 @@ const svgEditor = createSvgEditor(document, svgContainer);
 const svgAddElement = svgEditor(addElement);
 const svgSetElementParameters = svgEditor(setElementParameters);
 const svgAddElementParameters = svgEditor(addElementParameters);
+const svgRemoveElement = svgEditor(removeElement);
 
 const rect = svgAddElement({
   type: 'rect',
@@ -66,5 +68,7 @@ svgAddElementParameters({
   id: rect.id,
   width: 10
 });
+
+svgRemoveElement(rect);
 ```
 Advanced exapmle in example\example.ts

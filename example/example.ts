@@ -1,4 +1,4 @@
-import { createSvgEditor, addElement, addElementParameters } from '../src/index';
+import { createSvgEditor, addElement, addElementParameters, removeElement } from '../src/index';
 
 const svgContainer = document.getElementById('svgContainer');
 if (!svgContainer) {
@@ -11,6 +11,7 @@ if (!(svgContainer instanceof SVGSVGElement)) {
 const svgEditor = createSvgEditor(document, svgContainer);
 const svgAddElement = svgEditor(addElement);
 const svgAddElementParameters = svgEditor(addElementParameters);
+const svgRemoveElement = svgEditor(removeElement);
 
 const group = svgAddElement({
   type: 'group',
@@ -100,10 +101,18 @@ for (let i = 1; i <= 5; i++) {
   );
 }
 
-svgAddElement({
+const text = svgAddElement({
   type: 'text',
   x: 60,
   y: 20,
   text: 'Sample text',
   fontSize: 20
 });
+
+setTimeout(() => {
+  svgRemoveElement(text);
+}, 1000);
+
+setTimeout(() => {
+  svgAddElement(text);
+}, 2000);

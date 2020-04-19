@@ -108,3 +108,23 @@ export const addElementParameters = (stateChanger: StateChanger, parameters: Par
       return changedElement;
     }
   );
+
+export const removeElement = (stateChanger: StateChanger, parameters: Partial<Element>) =>
+  stateChanger(
+    (state: State, setState: SetState) => {
+      if (typeof parameters.id !== 'number') {
+        throw new Error('Element id are not defined');
+      }
+      const targetElementIndex = state.elements.findIndex(element => element.id === parameters.id);
+      if (typeof targetElementIndex !== 'number') {
+        throw new Error('Element not found');
+      }
+      const targetElement = state.elements[targetElementIndex];
+      const newElements = state.elements.filter((_, index) => index !== targetElementIndex);
+      setState({
+        ...state,
+        elements: newElements
+      });
+      return targetElement;
+    }
+  );
