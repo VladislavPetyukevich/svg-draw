@@ -26,9 +26,9 @@
     "source-map-loader": "^0.2.4",
     "ts-node-dev": "^1.0.0-pre.44",
     "typescript": "^3.6.4",
-    "webpack": "^4.29.6",
-    "webpack-cli": "^3.2.3",
-    "webpack-dev-server": "^3.2.1"
+    "webpack": "^4.42.1",
+    "webpack-cli": "^3.3.11",
+    "webpack-dev-server": "^3.10.3"
   },
   "scripts": {
     "start": "webpack-dev-server --env development --open",
